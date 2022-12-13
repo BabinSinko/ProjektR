@@ -1,0 +1,55 @@
+package hr.fer.projektr.game.entities;
+
+import hr.fer.projektr.game.GameState;
+
+/**
+ * Class representing the player.
+ */
+public class Player extends Entity{
+    /**
+     * A boolean representing if the player is currently wanting to jump (for example holding the space bar).
+     */
+    private boolean isJumping;
+
+    /**
+     * A boolean representing if the player is currently wanting to duck (for example holding the down arrow).
+     */
+    private boolean isDucking;
+
+    /**
+     * The vertical speed of the player.
+     */
+    private double verticalSpeed;
+
+    /**
+     * Constructor for the player. Takes no arguments and sets the vertical speed to 0.
+     */
+    public Player() {
+        super(GameState.INITIAL_PLAYER_POSITION_X, GameState.INITIAL_PLAYER_POSITION_Y, GameState.PLAYER_WIDTH, GameState.PLAYER_HEIGHT);
+        verticalSpeed = 0;
+    }
+
+    public boolean isJumping() {
+        return isJumping;
+    }
+
+    public void setJumping(boolean jumping) {
+        isJumping = jumping;
+    }
+
+    public boolean isDucking() {
+        return isDucking;
+    }
+
+    public void setDucking(boolean ducking) {
+        isDucking = ducking;
+    }
+
+    public double getVerticalSpeed() {
+        return verticalSpeed;
+    }
+
+    public void setVerticalSpeed(double verticalSpeed) {
+        this.verticalSpeed = verticalSpeed;
+    }
+}
