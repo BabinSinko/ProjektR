@@ -69,6 +69,21 @@ public class GameState {
      */
     public void step(){
         //TODO
+        /*
+         for (enemy:enemies){
+            moveEnemyX(enemy, gameSpeed);
+         }
+         if (player.isJumping()){
+           if (pozicija >= GRANICA_Y) {
+             pozicija = GRANICA_Y
+            }
+            else {
+                calculateVerticalVelocity;
+                movePlayerY(player, player.getVelocity());
+            }
+
+          }
+         */
     }
 
     /**
