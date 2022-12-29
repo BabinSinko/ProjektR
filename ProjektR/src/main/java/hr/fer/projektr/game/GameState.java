@@ -63,6 +63,19 @@ public class GameState {
         this.gameSpeed = INITIAL_GAME_SPEED;
     }
 
+    public List<Enemy> getEnemies(){
+        return enemies;
+    }
+
+    public void removeEnemy(int k){
+        enemies.remove(k);
+    }
+
+    public void addEnemy(Enemy enemy){
+        enemies.add(enemy);
+    }
+
+
     /**
      * Runs a single step of the game state simulation.
      * For example moves the enemies, deals with the player movement and checks for collisions with the player.
