@@ -82,6 +82,41 @@ public class GameState {
      */
     public void step(){
         //TODO
+
+
+	//procitati inpute jump i/ili duck
+    	
+    	//Izracunati novu Y koordinatu player-a
+    	double positionY = player.getPositionY();
+    	if((player.isJumping() == true && (positionY < 1.000001 && positionY > 0.9999999)) || 
+    			positionY <= 0.9999999) {
+    		
+    		//konstante namjestati, gravitacija najvise ovisi o frameratu zbog kvadrata, paziti na to
+    		time += 0.1;
+    			
+    		positionY = positionY + player.getVerticalSpeed() * time + GRAVITY * time * time;
+    			
+    		if(positionY >= 0.99) {
+    			positionY = 1;
+	    		time = 0;
+    		}
+    			
+    		player.setPositionY(positionY);
+    			
+    		/*
+    		//printove zamijeniti s iscrtavanjem
+    		System.out.println("PositionY: " + positionY);
+    		System.out.println("t: " + time);
+    		*/
+    		
+	}
+    	
+    	//Izracunati X koordinatu enemies-a
+    		
+    	//Provjera kolizije
+    	
+    	//Iscrtavanje ekrana
+
         /*
          for (enemy:enemies){
             moveEnemyX(enemy, gameSpeed);

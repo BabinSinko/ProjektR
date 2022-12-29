@@ -26,7 +26,7 @@ public class Player extends Entity{
      */
     public Player() {
         super(GameState.INITIAL_PLAYER_POSITION_X, GameState.INITIAL_PLAYER_POSITION_Y, GameState.PLAYER_WIDTH, GameState.PLAYER_HEIGHT);
-        verticalSpeed = 0;
+        verticalSpeed = 0.785;
     }
 
     public boolean isJumping() {
