@@ -10,7 +10,11 @@ public enum CactusType {
     /**
      * The most standard cactus, declared by the ISO
      */
-    STANDARD(GameState.STANDARD_CACTUS_WIDTH, GameState.STANDARD_CACTUS_HEIGHT);
+    STANDARD(GameState.STANDARD_CACTUS_WIDTH, GameState.STANDARD_CACTUS_HEIGHT),
+
+    SMALL(GameState.SMALL_CACTUS_WIDTH, GameState.SMALL_CACTUS_HEIGHT),
+
+    LARGE(GameState.LARGE_CACTUS_WIDTH, GameState.LARGE_CACTUS_HEIGHT);
 
     final double width;
     final double height;

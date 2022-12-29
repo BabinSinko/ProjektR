@@ -67,4 +67,13 @@ public abstract class Entity {
     public void setPositionY(double positionY) {
         this.positionY = positionY;
     }
+
+    /**
+     * samo za testiranje
+     * @return formatiranu duljinu i visinu entitya
+     */
+    @Override
+    public String toString(){
+        return String.format("(%s, %s)", getWidth(), getHeight());
+    }
 }

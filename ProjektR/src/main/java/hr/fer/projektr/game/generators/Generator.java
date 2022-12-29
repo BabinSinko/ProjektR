@@ -1,16 +1,27 @@
 package hr.fer.projektr.game.generators;
 
 import hr.fer.projektr.game.GameState;
+import hr.fer.projektr.game.entities.Bird;
+import hr.fer.projektr.game.entities.Cactus;
+import hr.fer.projektr.game.entities.CactusType;
 import hr.fer.projektr.game.entities.Enemy;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * Abstract class modeling an object that generates other objects, or in other words, a generator.
  */
-public abstract class Generator {
+public class Generator {
 
     private GameState gameState;
+
+    /**
+     * Nasumicno generirani broj.
+     * Na svaki tick se smanji za jedan.
+     * Kad se smanji na 0, resetira se i stvara se novi neprijatelj
+     */
+    private int ticks;
 
     /**
      * konstruktor
@@ -18,6 +29,8 @@ public abstract class Generator {
      */
     public Generator(GameState gameState){
         this.gameState=gameState;
+        Random rand=new Random();
+        ticks=rand.nextInt(31)+20;
     }
 
     /**
@@ -29,10 +42,27 @@ public abstract class Generator {
 
         removeEnemies();
 
-        List<Enemy> enemies=gameState.getEnemies();
+        if ( ticks>0 ) {
+            ticks--;
+        }
+        else{
+            Random rand=new Random();
 
-        if ( enemies.size()<4 ) {
+            int noEnemy=rand.nextInt(20);
+            if (noEnemy<5){
+                gameState.addEnemy(new Cactus(CactusType.SMALL));
+            }
+            else if (noEnemy<10){
+                gameState.addEnemy(new Cactus(CactusType.STANDARD));
+            }
+            else if (noEnemy<15){
+                gameState.addEnemy(new Cactus(CactusType.LARGE));
+            }
+            else {
+                gameState.addEnemy(new Bird(rand.nextDouble()));
+            }
 
+            ticks=rand.nextInt(31)+20;
         }
     }
 

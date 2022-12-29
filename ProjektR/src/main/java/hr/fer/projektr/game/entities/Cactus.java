@@ -10,13 +10,14 @@ import hr.fer.projektr.game.GameState;
 public class Cactus extends Enemy{
 
     /**
-     * The argumentless constructor.
-     * For testing only.
+     * The argumentless constructor.<br/>
+     * For testing only.<br/>
      * Creates a standard cactus.
      */
     public Cactus() {
         this(CactusType.STANDARD);
     }
+
 
     /**
      * This constructor takes one argument, the CactusType that is to be created.
@@ -25,4 +26,6 @@ public class Cactus extends Enemy{
     public Cactus(CactusType cactusType){
         super(GameState.INITIAL_CACTUS_POSITION_X, GameState.INITIAL_CACTUS_POSITION_Y, cactusType.width, cactusType.height);
     }
+
+
 }
