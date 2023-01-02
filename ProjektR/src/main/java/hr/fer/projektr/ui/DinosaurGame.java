@@ -1,0 +1,75 @@
+package hr.fer.projektr.ui;
+
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
+
+import hr.fer.projektr.game.GameState;
+
+public class DinosaurGame extends JFrame {	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private final static int WIDTH = 1000;
+	private final static int HEIGHT = 1000;
+	
+
+	public DinosaurGame() {		
+		setLocation(20, 50);
+		setSize(WIDTH, HEIGHT);
+		setTitle("Dinosaur");
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		initGui();
+	}
+	
+	private void initGui() {
+		GameState game = new GameState();
+		
+		addKeyListener(new InputListener(game));
+		JPanel panel = new DinosaurPanel(game);
+		add(panel);
+	}
+	
+
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(() -> {
+			JFrame frame = new DinosaurGame();
+			frame.setVisible(true);
+		});
+	}
+	
+	private static class InputListener extends KeyAdapter {
+		GameState game;
+		
+		public InputListener(GameState game) {
+			this.game = game;
+		}
+		
+		@Override
+		public void keyPressed(KeyEvent e) {
+			int key = e.getKeyCode();
+			
+			switch (key) {
+			case 38:
+				game.jump();
+				break;
+	
+			case 40:
+				game.duck();
+				break;
+				
+			default:
+				break;
+			}
+			
+		}
+	}
+	
+}

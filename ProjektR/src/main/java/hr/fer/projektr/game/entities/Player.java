@@ -1,11 +1,13 @@
 package hr.fer.projektr.game.entities;
 
+import java.awt.Graphics;
+
 import hr.fer.projektr.game.GameState;
 
 /**
  * Class representing the player.
  */
-public class Player extends Entity{
+public class Player extends Entity {
     /**
      * A boolean representing if the player is currently wanting to jump (for example holding the space bar).
      */
@@ -25,7 +27,7 @@ public class Player extends Entity{
      * Constructor for the player. Takes no arguments and sets the vertical speed to 0.
      */
     public Player() {
-        super(GameState.INITIAL_PLAYER_POSITION_X, GameState.INITIAL_PLAYER_POSITION_Y, GameState.PLAYER_WIDTH, GameState.PLAYER_HEIGHT);
+        super(GameState.INITIAL_PLAYER_POSITION_X, GameState.INITIAL_PLAYER_POSITION_Y, GameState.PLAYER_WIDTH, GameState.PLAYER_HEIGHT, EntityType.PLAYER);
         verticalSpeed = 0.785;
     }
 

@@ -21,6 +21,6 @@ public final class Bird extends Enemy{
      * @param positionY a double number between 0 and 1, representing the height at which the bird is to be spawned.
      */
     public Bird(double positionY){
-        super(GameState.INITIAL_BIRD_POSITION_X, positionY, GameState.BIRD_WIDTH, GameState.BIRD_HEIGHT);
+        super(GameState.INITIAL_BIRD_POSITION_X, positionY, GameState.BIRD_WIDTH, GameState.BIRD_HEIGHT, EntityType.BIRD);
     }
 }

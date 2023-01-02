@@ -36,12 +36,16 @@ public abstract class Entity {
      * @param width size in the x-axis. A double between 1 and 0
      * @param height size in the y-axis. A double between 1 and 0
      */
-    public Entity(double positionX, double positionY, double width, double height) {
+    
+    private final EntityType type;
+    
+    public Entity(double positionX, double positionY, double width, double height, EntityType type) {
         //TODO Add an if checking that all arguments are between 0 and 1 (if deemed necessary)
         this.positionX = positionX;
         this.positionY = positionY;
         this.width = width;
         this.height = height;
+        this.type = type;
     }
 
     public double getPositionX() {
@@ -66,6 +70,10 @@ public abstract class Entity {
 
     public void setPositionY(double positionY) {
         this.positionY = positionY;
+    }
+    
+    public EntityType getEntityType() {
+    	return type;
     }
 
     /**

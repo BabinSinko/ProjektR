@@ -15,8 +15,8 @@ public abstract class Enemy extends Entity{
      * @param width width of the Enemy
      * @param height width of the Enemy
      */
-    public Enemy(double positionX, double positionY, double width, double height) {
-        super(positionX, positionY, width, height);
+    public Enemy(double positionX, double positionY, double width, double height, EntityType type) {
+        super(positionX, positionY, width, height, type);
     }
 
 

@@ -24,7 +24,9 @@ public class Cactus extends Enemy{
      * @param cactusType enum constant of CactusType, which represents the type (height and width) of the cactus.
      */
     public Cactus(CactusType cactusType){
-        super(GameState.INITIAL_CACTUS_POSITION_X, GameState.INITIAL_CACTUS_POSITION_Y, cactusType.width, cactusType.height);
+    	// TODO
+    	// EntityType
+        super(GameState.INITIAL_CACTUS_POSITION_X, GameState.INITIAL_CACTUS_POSITION_Y, cactusType.width, cactusType.height, EntityType.CACTUS_STANDARD);
     }
 
 

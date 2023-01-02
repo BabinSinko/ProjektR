@@ -1,6 +1,7 @@
 package hr.fer.projektr.game;
 
 import hr.fer.projektr.game.entities.Enemy;
+import hr.fer.projektr.game.entities.Entity;
 import hr.fer.projektr.game.entities.Player;
 
 import java.util.ArrayList;
@@ -67,6 +68,10 @@ public class GameState {
         this.gameSpeed = INITIAL_GAME_SPEED;
     }
 
+    public Entity getPlayer() {
+    	return player;
+    }
+    
     public List<Enemy> getEnemies(){
         return enemies;
     }
@@ -94,34 +99,36 @@ public class GameState {
      */
     public void step(){
         //TODO
-
+    	if (player.isJumping()) {
+    		updateJump();
+    	}
 
 	//procitati inpute jump i/ili duck
     	
-    	//Izracunati novu Y koordinatu player-a
-    	double positionY = player.getPositionY();
-    	if((player.isJumping() == true && (positionY < 1.000001 && positionY > 0.9999999)) || 
-    			positionY <= 0.9999999) {
-    		
-    		//konstante namjestati, gravitacija najvise ovisi o frameratu zbog kvadrata, paziti na to
-    		time += 0.1;
-    			
-    		positionY = positionY + player.getVerticalSpeed() * time + GRAVITY * time * time;
-    			
-    		if(positionY >= 0.99) {
-    			positionY = 1;
-	    		time = 0;
-    		}
-    			
-    		player.setPositionY(positionY);
-    			
-    		/*
-    		//printove zamijeniti s iscrtavanjem
-    		System.out.println("PositionY: " + positionY);
-    		System.out.println("t: " + time);
-    		*/
-    		
-	}
+//    	//Izracunati novu Y koordinatu player-a
+//    	double positionY = player.getPositionY();
+//    	if((player.isJumping() == true && (positionY < 1.000001 && positionY > 0.9999999)) || 
+//    			positionY <= 0.9999999) {
+//    		
+//    		//konstante namjestati, gravitacija najvise ovisi o frameratu zbog kvadrata, paziti na to
+//    		time += 0.1;
+//    			
+//    		positionY = positionY + player.getVerticalSpeed() * time + GRAVITY * time * time;
+//    			
+//    		if(positionY >= 0.99) {
+//    			positionY = 1;
+//	    		time = 0;
+//    		}
+//    			
+//    		player.setPositionY(positionY);
+//    			
+//    		/*
+//    		//printove zamijeniti s iscrtavanjem
+//    		System.out.println("PositionY: " + positionY);
+//    		System.out.println("t: " + time);
+//    		*/
+//    		
+//	}
     	
     	//Izracunati X koordinatu enemies-a
     		
@@ -146,6 +153,29 @@ public class GameState {
          */
     }
 
+    //ISTO KAO I influencePlayer
+    public void jump() {
+    	if (!player.isJumping()) {
+	    	player.setJumping(true);
+	    	player.setVerticalSpeed(-0.05);
+	    	player.setPositionY(player.getPositionY() - 0.05);
+    	}
+    }
+    //ISTO KAO I influencePlayer
+    public void duck() {
+    	
+    }
+   
+    private void updateJump() {
+	    if (player.getPositionY() >= 1) {
+	        player.setPositionY(1);
+	        player.setJumping(false);
+	    } else {
+	        player.setVerticalSpeed(player.getVerticalSpeed() + 0.01);
+	        player.setPositionY(player.getPositionY() + player.getVerticalSpeed());
+	    }
+    }
+    
     /**
      * Stand-in function for controlling the player
      * @param jump the player wants to jump if true
