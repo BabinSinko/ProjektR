@@ -25,7 +25,7 @@ public class DinosaurGame extends JFrame {
 		setLocation(0, 0);
 		setSize(WIDTH, HEIGHT);
 		setTitle("Dinosaur");
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		initGui();
 	}
 	
