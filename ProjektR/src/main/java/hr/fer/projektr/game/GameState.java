@@ -98,7 +98,7 @@ public class GameState {
      * For example moves the enemies, deals with the player movement and checks for collisions with the player.
      */
     public void step(){
-        //TODO
+        //TODO pokretat generator, pozivat physics za entitete i provjeravati kolizije
     	if (player.isJumping()) {
     		updateJump();
     	}
