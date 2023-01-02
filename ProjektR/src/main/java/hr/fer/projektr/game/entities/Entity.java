@@ -21,13 +21,13 @@ public abstract class Entity {
      * Size in the x-axis.
      * A double between 1 and 0.
      */
-    private final double width;
+    private double width;
 
     /**
      * Size in the y-axis.
      * A double between 1 and 0.
      */
-    private final double height;
+    private double height;
 
     /**
      * The default constructor for entities.
@@ -70,6 +70,10 @@ public abstract class Entity {
 
     public void setPositionY(double positionY) {
         this.positionY = positionY;
+    }
+    
+    public void setHeight(double height) {
+    	this.height = height;
     }
     
     public EntityType getEntityType() {

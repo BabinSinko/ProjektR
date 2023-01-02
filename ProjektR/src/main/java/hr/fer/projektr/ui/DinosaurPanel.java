@@ -12,8 +12,8 @@ import hr.fer.projektr.game.GameState;
 import hr.fer.projektr.game.entities.Entity;
 
 public class DinosaurPanel extends JPanel implements ActionListener {
-	private final static int WIDTH = 500;
-	private final static int HEIGHT = 500;
+	private final static int WIDTH = 1600;
+	private final static int HEIGHT = 900;
 	private final static int DELAY = 10;
 	
 	private static final long serialVersionUID = 1L;
@@ -51,7 +51,7 @@ public class DinosaurPanel extends JPanel implements ActionListener {
 	
 	private void drawEntity(Graphics g, Entity entity) {
 		Image image = ei.getEntityImage(entity);
-		g.drawImage(image, convertWidth(entity.getPositionX()), convertHeight(entity.getPositionY()), convertWidth(entity.getWidth()), convertHeight(entity.getWidth()), null);
+		g.drawImage(image, convertWidth(entity.getPositionX()), convertHeight(entity.getPositionY() - entity.getHeight()), convertWidth(entity.getWidth()), convertHeight(entity.getHeight()), null);
 	}
 	
 	private static int convertWidth(double width) {

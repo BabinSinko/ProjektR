@@ -17,12 +17,12 @@ public class DinosaurGame extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private final static int WIDTH = 1000;
-	private final static int HEIGHT = 1000;
+	private final static int WIDTH = 1600;
+	private final static int HEIGHT = 950;
 	
 
 	public DinosaurGame() {		
-		setLocation(20, 50);
+		setLocation(0, 0);
 		setSize(WIDTH, HEIGHT);
 		setTitle("Dinosaur");
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -69,6 +69,15 @@ public class DinosaurGame extends JFrame {
 				break;
 			}
 			
+		}
+		
+		@Override
+		public void keyReleased(KeyEvent e) {
+			int key = e.getKeyCode();
+			
+			if (key == 40) {
+				game.stand();
+			}
 		}
 	}
 	

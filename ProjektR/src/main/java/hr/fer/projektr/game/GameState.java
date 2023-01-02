@@ -155,19 +155,29 @@ public class GameState {
 
     //ISTO KAO I influencePlayer
     public void jump() {
-    	if (!player.isJumping()) {
+    	if (!player.isJumping() && !player.isDucking()) {
 	    	player.setJumping(true);
-	    	player.setVerticalSpeed(-0.05);
-	    	player.setPositionY(player.getPositionY() - 0.05);
+	    	player.setVerticalSpeed(-0.1);
+	    	player.setPositionY(player.getPositionY() - 0.1);
     	}
     }
     //ISTO KAO I influencePlayer
     public void duck() {
-    	
+    	if (!player.isJumping()) {
+        	player.setDucking(true);
+        	player.setHeight(PLAYER_HEIGHT / 3);
+    	}
     }
-   
+    
+    public void stand() {
+    	if (player.isDucking()) {
+	    	player.setDucking(false);
+	    	player.setHeight(PLAYER_HEIGHT);
+    	}
+    }
+    
     private void updateJump() {
-	    if (player.getPositionY() >= 1) {
+	    if (player.getPositionY() >= 0.9999) {
 	        player.setPositionY(1);
 	        player.setJumping(false);
 	    } else {
