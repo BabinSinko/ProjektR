@@ -27,7 +27,6 @@ public class DinosaurPanel extends JPanel implements ActionListener {
 		this.game = game;
 		ei = new EntityImage();
         timer = new Timer(DELAY, this);
-        game.start();
 		gameStart();
 	}
 	
@@ -36,6 +35,7 @@ public class DinosaurPanel extends JPanel implements ActionListener {
 	}
 	
 	private void render() {
+		game.step();
 		repaint();
 	}
 	

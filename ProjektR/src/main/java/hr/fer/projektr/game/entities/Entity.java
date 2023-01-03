@@ -9,13 +9,13 @@ public abstract class Entity {
      * Position in the x-axis.
      * A double between 1 and 0.
      */
-    private double positionX;
+    private volatile double positionX;
 
     /**
      * Position in the y-axis.
      * A double between 1 and 0.
      */
-    private double positionY;
+    private volatile double positionY;
 
     /**
      * Size in the x-axis.
@@ -86,6 +86,6 @@ public abstract class Entity {
      */
     @Override
     public String toString(){
-        return String.format("(%s, %s)", getWidth(), getHeight());
+        return String.format("(width:%s, height:%s, x:%s, y:%s)", getWidth(), getHeight(), getPositionX(), getPositionY());
     }
 }

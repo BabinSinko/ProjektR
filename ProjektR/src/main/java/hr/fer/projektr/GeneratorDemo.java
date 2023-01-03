@@ -17,9 +17,7 @@ public class GeneratorDemo {
 
         for (int k=0; k<500; k++){
 
-            for (Enemy enemy:state.getEnemies()){
-                Physics.moveEnemyX(enemy, state.getSpeed());
-            }
+            Physics.moveEnemies(state.getEnemies(), state.getSpeed());
             generator.updateList();
 
             System.out.println(String.valueOf(k) + " ".repeat(5-noOfDigits(k)) + state.getEnemies());

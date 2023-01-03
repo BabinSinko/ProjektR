@@ -12,8 +12,8 @@ public class GameInterface {
         this.gameState = new GameState();
     }
 
-    public void start(){
-        gameState.start();
+    public void step(){
+        gameState.step();
     }
 
     public void input(boolean duck, boolean jump){

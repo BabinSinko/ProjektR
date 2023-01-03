@@ -4,6 +4,8 @@ import hr.fer.projektr.game.GameState;
 import hr.fer.projektr.game.entities.Enemy;
 import hr.fer.projektr.game.entities.Player;
 
+import java.util.List;
+
 public class Physics {
 
 
@@ -12,8 +14,10 @@ public class Physics {
         //player.setVerticalSpeed();
     }
 
-    public static void moveEnemyX(Enemy enemy, double amount){
-        enemy.setPositionX(enemy.getPositionX()-amount);
+    public static void moveEnemies(List<Enemy> enemies, double amount){
+        for (Enemy enemy: enemies){
+            enemy.setPositionX(enemy.getPositionX() - amount * GameState.STEP_DURATION);
+        }
     }
 
     public static void playerUpdate(Player player){

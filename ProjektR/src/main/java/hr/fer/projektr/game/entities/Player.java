@@ -30,6 +30,16 @@ public class Player extends Entity {
         super(GameState.INITIAL_PLAYER_POSITION_X, GameState.INITIAL_PLAYER_POSITION_Y, GameState.PLAYER_WIDTH, GameState.PLAYER_HEIGHT, EntityType.PLAYER);
     }
 
+    @Override
+    public double getHeight() {
+        if (isDucking){
+            return GameState.PLAYER_CROUCH_HEIGHT;
+        }
+        else {
+            return super.getHeight();
+        }
+    }
+
     public boolean isJumping() {
         return isJumping;
     }

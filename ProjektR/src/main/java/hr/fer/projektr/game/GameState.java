@@ -3,6 +3,7 @@ package hr.fer.projektr.game;
 import hr.fer.projektr.game.entities.Enemy;
 import hr.fer.projektr.game.entities.Entity;
 import hr.fer.projektr.game.entities.Player;
+import hr.fer.projektr.game.generators.Generator;
 import hr.fer.projektr.game.utility.Physics;
 
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ public class GameState {
     public static final double INITIAL_PLAYER_POSITION_Y = 1;
     public static final double PLAYER_WIDTH = 0.1;
     public static final double PLAYER_HEIGHT = 0.2;
+    public static final double PLAYER_CROUCH_HEIGHT = 0.07;
+
     public static final double INITIAL_JUMP_SPEED = -1.5;
 
 
@@ -43,7 +46,7 @@ public class GameState {
 
     //Constants relating to the game world
     public static final double GRAVITY = 2.;
-    public static final double INITIAL_GAME_SPEED = 0.05;
+    public static final double INITIAL_GAME_SPEED = 2;
     public static final double STEP_DURATION = 0.01666666666;
 
 
@@ -67,7 +70,7 @@ public class GameState {
      */
     private long score;
 
-    final ScheduledExecutorService executorService;
+    private Generator generator;
 
     /**
      * Constructor for the game state, initializes everything by itself.
@@ -76,7 +79,7 @@ public class GameState {
         this.player = new Player();
         this.enemies = new ArrayList<>();
         this.gameSpeed = INITIAL_GAME_SPEED;
-        this.executorService = Executors.newSingleThreadScheduledExecutor();
+        this.generator = new Generator(this);
     }
 
     public Player getPlayer() {
@@ -111,13 +114,13 @@ public class GameState {
     public void step(){
         //TODO pokretat generator, pozivat physics za entitete i provjeravati kolizije
         Physics.playerUpdate(player);
+        Physics.moveEnemies(enemies, gameSpeed);
+        generator.updateList();
+        System.out.println(enemies);
     }
 
-    public void start(){
-        executorService.scheduleAtFixedRate(this::step, 0, (long) (GameState.STEP_DURATION * 1000_000), TimeUnit.MICROSECONDS);
-    }
-
+    //TODO
     public boolean isOver(){
-        return executorService.isShutdown();
+        return false;
     }
 }
