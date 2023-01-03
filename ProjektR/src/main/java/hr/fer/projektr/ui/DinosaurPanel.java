@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import hr.fer.projektr.game.GameInterface;
 import hr.fer.projektr.game.GameState;
 import hr.fer.projektr.game.entities.Entity;
 
@@ -18,15 +19,15 @@ public class DinosaurPanel extends JPanel implements ActionListener {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private GameState game;
+	private GameInterface game;
 	private EntityImage ei;
 	private Timer timer;
 	
-	public DinosaurPanel(GameState game) {
+	public DinosaurPanel(GameInterface game) {
 		this.game = game;
 		ei = new EntityImage();
         timer = new Timer(DELAY, this);
-        
+        game.start();
 		gameStart();
 	}
 	
@@ -35,7 +36,6 @@ public class DinosaurPanel extends JPanel implements ActionListener {
 	}
 	
 	private void render() {
-		game.step();
 		repaint();
 	}
 	

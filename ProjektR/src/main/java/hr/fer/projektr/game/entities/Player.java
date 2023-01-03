@@ -28,7 +28,6 @@ public class Player extends Entity {
      */
     public Player() {
         super(GameState.INITIAL_PLAYER_POSITION_X, GameState.INITIAL_PLAYER_POSITION_Y, GameState.PLAYER_WIDTH, GameState.PLAYER_HEIGHT, EntityType.PLAYER);
-        verticalSpeed = 0.785;
     }
 
     public boolean isJumping() {
@@ -53,5 +52,15 @@ public class Player extends Entity {
 
     public void setVerticalSpeed(double verticalSpeed) {
         this.verticalSpeed = verticalSpeed;
+    }
+
+    public void influencePlayer(boolean duck, boolean jump){
+        this.isDucking = duck;
+        this.isJumping = jump;
+
+        //check if allowed to jump
+        if (getPositionY() == GameState.INITIAL_PLAYER_POSITION_Y && !this.isDucking && this.isJumping){
+            this.verticalSpeed = GameState.INITIAL_JUMP_SPEED;
+        }
     }
 }

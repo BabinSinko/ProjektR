@@ -1,7 +1,7 @@
 package hr.fer.projektr.game.utility;
 
+import hr.fer.projektr.game.GameState;
 import hr.fer.projektr.game.entities.Enemy;
-import hr.fer.projektr.game.entities.Entity;
 import hr.fer.projektr.game.entities.Player;
 
 public class Physics {
@@ -16,8 +16,19 @@ public class Physics {
         enemy.setPositionX(enemy.getPositionX()-amount);
     }
 
-    public static void movePlayerY(Player player, double amount){
-        player.setPositionY(player.getPositionY()+amount);
+    public static void playerUpdate(Player player){
+        //ako ne nije u zraku i nema brzinu nema smisla izvrsavati fju
+        if (player.getVerticalSpeed() == 0. && player.getPositionY() == GameState.INITIAL_PLAYER_POSITION_Y){
+            return;
+        }
+
+        if (player.getPositionY() + player.getVerticalSpeed() * GameState.STEP_DURATION > GameState.INITIAL_PLAYER_POSITION_Y){
+            player.setPositionY(GameState.INITIAL_PLAYER_POSITION_Y);
+            player.setVerticalSpeed(0.);
+        } else {
+            player.setPositionY(player.getPositionY() + player.getVerticalSpeed() * GameState.STEP_DURATION);
+            player.setVerticalSpeed(player.getVerticalSpeed() + GameState.GRAVITY * GameState.STEP_DURATION);
+        }
     }
 
   //Sluzilo samo za isprobavanje skoka, mozda korisno za ubuduce, inace ignore ili delete

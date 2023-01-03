@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
+import hr.fer.projektr.game.GameInterface;
 import hr.fer.projektr.game.GameState;
 
 public class DinosaurGame extends JFrame {	
@@ -30,7 +31,7 @@ public class DinosaurGame extends JFrame {
 	}
 	
 	private void initGui() {
-		GameState game = new GameState();
+		GameInterface game = new GameInterface();
 		
 		addKeyListener(new InputListener(game));
 		JPanel panel = new DinosaurPanel(game);
@@ -46,9 +47,9 @@ public class DinosaurGame extends JFrame {
 	}
 	
 	private static class InputListener extends KeyAdapter {
-		GameState game;
+		GameInterface game;
 		
-		public InputListener(GameState game) {
+		public InputListener(GameInterface game) {
 			this.game = game;
 		}
 		
@@ -58,11 +59,11 @@ public class DinosaurGame extends JFrame {
 			
 			switch (key) {
 			case 38:
-				game.jump();
+				game.input(false, true);
 				break;
 	
 			case 40:
-				game.duck();
+				game.input(true, false);
 				break;
 				
 			default:
@@ -76,7 +77,7 @@ public class DinosaurGame extends JFrame {
 			int key = e.getKeyCode();
 			
 			if (key == 40) {
-				game.stand();
+				game.input(false, false);
 			}
 		}
 	}

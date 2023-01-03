@@ -3,9 +3,13 @@ package hr.fer.projektr.game;
 import hr.fer.projektr.game.entities.Enemy;
 import hr.fer.projektr.game.entities.Entity;
 import hr.fer.projektr.game.entities.Player;
+import hr.fer.projektr.game.utility.Physics;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Class representing a game state.
@@ -18,6 +22,8 @@ public class GameState {
     public static final double INITIAL_PLAYER_POSITION_Y = 1;
     public static final double PLAYER_WIDTH = 0.1;
     public static final double PLAYER_HEIGHT = 0.2;
+    public static final double INITIAL_JUMP_SPEED = -1.5;
+
 
     //Constants relating to the cactus enemies
     public static final double INITIAL_CACTUS_POSITION_X = 1;
@@ -36,8 +42,10 @@ public class GameState {
     public static final double BIRD_HEIGHT = 0.1;
 
     //Constants relating to the game world
-    public static final double GRAVITY = 10;
+    public static final double GRAVITY = 2.;
     public static final double INITIAL_GAME_SPEED = 0.05;
+    public static final double STEP_DURATION = 0.01666666666;
+
 
     /**
      * The player in this game state
@@ -59,6 +67,8 @@ public class GameState {
      */
     private long score;
 
+    final ScheduledExecutorService executorService;
+
     /**
      * Constructor for the game state, initializes everything by itself.
      */
@@ -66,9 +76,10 @@ public class GameState {
         this.player = new Player();
         this.enemies = new ArrayList<>();
         this.gameSpeed = INITIAL_GAME_SPEED;
+        this.executorService = Executors.newSingleThreadScheduledExecutor();
     }
 
-    public Entity getPlayer() {
+    public Player getPlayer() {
     	return player;
     }
     
@@ -99,99 +110,14 @@ public class GameState {
      */
     public void step(){
         //TODO pokretat generator, pozivat physics za entitete i provjeravati kolizije
-    	if (player.isJumping()) {
-    		updateJump();
-    	}
-
-	//procitati inpute jump i/ili duck
-    	
-//    	//Izracunati novu Y koordinatu player-a
-//    	double positionY = player.getPositionY();
-//    	if((player.isJumping() == true && (positionY < 1.000001 && positionY > 0.9999999)) || 
-//    			positionY <= 0.9999999) {
-//    		
-//    		//konstante namjestati, gravitacija najvise ovisi o frameratu zbog kvadrata, paziti na to
-//    		time += 0.1;
-//    			
-//    		positionY = positionY + player.getVerticalSpeed() * time + GRAVITY * time * time;
-//    			
-//    		if(positionY >= 0.99) {
-//    			positionY = 1;
-//	    		time = 0;
-//    		}
-//    			
-//    		player.setPositionY(positionY);
-//    			
-//    		/*
-//    		//printove zamijeniti s iscrtavanjem
-//    		System.out.println("PositionY: " + positionY);
-//    		System.out.println("t: " + time);
-//    		*/
-//    		
-//	}
-    	
-    	//Izracunati X koordinatu enemies-a
-    		
-    	//Provjera kolizije
-    	
-    	//Iscrtavanje ekrana
-
-        /*
-         for (enemy:enemies){
-            moveEnemyX(enemy, gameSpeed);
-         }
-         if (player.isJumping()){
-           if (pozicija >= GRANICA_Y) {
-             pozicija = GRANICA_Y
-            }
-            else {
-                calculateVerticalVelocity;
-                movePlayerY(player, player.getVelocity());
-            }
-
-          }
-         */
+        Physics.playerUpdate(player);
     }
 
-    //ISTO KAO I influencePlayer
-    public void jump() {
-    	if (!player.isJumping() && !player.isDucking()) {
-	    	player.setJumping(true);
-	    	player.setVerticalSpeed(-0.1);
-	    	player.setPositionY(player.getPositionY() - 0.1);
-    	}
+    public void start(){
+        executorService.scheduleAtFixedRate(this::step, 0, (long) (GameState.STEP_DURATION * 1000_000), TimeUnit.MICROSECONDS);
     }
-    //ISTO KAO I influencePlayer
-    public void duck() {
-    	if (!player.isJumping()) {
-        	player.setDucking(true);
-        	player.setHeight(PLAYER_HEIGHT / 3);
-    	}
-    }
-    
-    public void stand() {
-    	if (player.isDucking()) {
-	    	player.setDucking(false);
-	    	player.setHeight(PLAYER_HEIGHT);
-    	}
-    }
-    
-    private void updateJump() {
-	    if (player.getPositionY() >= 0.9999) {
-	        player.setPositionY(1);
-	        player.setJumping(false);
-	    } else {
-	        player.setVerticalSpeed(player.getVerticalSpeed() + 0.01);
-	        player.setPositionY(player.getPositionY() + player.getVerticalSpeed());
-	    }
-    }
-    
-    /**
-     * Stand-in function for controlling the player
-     * @param jump the player wants to jump if true
-     * @param duck the player wants to duck if true
-     */
-    public void influencePlayer(boolean jump, boolean duck){
-        //TODO
+
+    public boolean isOver(){
+        return executorService.isShutdown();
     }
 }
