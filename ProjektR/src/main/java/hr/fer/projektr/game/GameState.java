@@ -46,7 +46,7 @@ public class GameState {
 
     //Constants relating to the game world
     public static final double GRAVITY = 2.;
-    public static final double INITIAL_GAME_SPEED = 2;
+    public static final double INITIAL_GAME_SPEED = 0.2;
     public static final double STEP_DURATION = 0.01666666666;
 
 

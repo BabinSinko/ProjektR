@@ -10,7 +10,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 import hr.fer.projektr.game.GameInterface;
-import hr.fer.projektr.game.GameState;
 
 public class DinosaurGame extends JFrame {	
 	/**

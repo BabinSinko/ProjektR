@@ -21,10 +21,10 @@ public class EntityImage {
 		try {
 			this.playerImage = ImageIO.read(getClass().getClassLoader().getResource("dinosaur.png"));
 			this.playerDuckingImage = ImageIO.read(getClass().getClassLoader().getResource("dinosaur_ducking.png"));
-//			this.cactusSmallImage = ImageIO.read(getClass().getClassLoader().getResource("cactus_small.png"));
-//			this.cactusStandardImage = ImageIO.read(getClass().getClassLoader().getResource("cactus_standard.png"));
-//			this.cactusLargeImage = ImageIO.read(getClass().getClassLoader().getResource("cactus_large.png"));
-//			this.birdImage = ImageIO.read(getClass().getClassLoader().getResource("bird.png"));
+			this.cactusSmallImage = ImageIO.read(getClass().getClassLoader().getResource("bird.png"));
+			this.cactusStandardImage = ImageIO.read(getClass().getClassLoader().getResource("bird.png"));
+			this.cactusLargeImage = ImageIO.read(getClass().getClassLoader().getResource("bird.png"));
+			this.birdImage = ImageIO.read(getClass().getClassLoader().getResource("bird.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
