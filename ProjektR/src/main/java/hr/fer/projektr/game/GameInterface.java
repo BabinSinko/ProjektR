@@ -27,4 +27,11 @@ public class GameInterface {
     public List<Enemy> getEnemies(){
         return gameState.getEnemies();
     }
+
+    public void gameStart(){
+
+    }
+    public boolean isOver(){
+        return gameState.isOver();
+    }
 }
