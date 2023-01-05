@@ -1,7 +1,6 @@
 package hr.fer.projektr.ui;
 
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -42,7 +41,12 @@ public class DinosaurPanel extends JPanel implements ActionListener {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
+		/*
+		Ovo dolje popravlja moje linux zivotne probleme, pls ne micati.
+		Ty,
+		Matej.
+		 */
+		Toolkit.getDefaultToolkit().sync();
 		drawEntity(g, game.getPlayer());
 		for (Entity entity : game.getEnemies()) {
 			drawEntity(g, entity);

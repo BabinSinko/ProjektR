@@ -9,9 +9,12 @@ public class GameInterface {
     private final GameState gameState;
 
     public GameInterface() {
-        this.gameState = new GameState();
+        this(60);
     }
 
+    public GameInterface(int fps) {
+        this.gameState = new GameState(1./fps);
+    }
     public void step(){
         gameState.step();
     }
@@ -28,10 +31,14 @@ public class GameInterface {
         return gameState.getEnemies();
     }
 
-    public void gameStart(){
-
+    public void start(){
+        gameState.start();
     }
     public boolean isOver(){
         return gameState.isOver();
+    }
+
+    public int getScore(){
+        return gameState.getScore();
     }
 }

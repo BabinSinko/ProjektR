@@ -31,7 +31,7 @@ public class DinosaurGame extends JFrame {
 	
 	private void initGui() {
 		GameInterface game = new GameInterface();
-		
+		game.start();
 		addKeyListener(new InputListener(game));
 		JPanel panel = new DinosaurPanel(game);
 		add(panel);
@@ -64,13 +64,13 @@ public class DinosaurGame extends JFrame {
 			case 40:
 				game.input(true, false);
 				break;
-				
+
 			default:
 				break;
 			}
-			
+
 		}
-		
+
 		@Override
 		public void keyReleased(KeyEvent e) {
 			int key = e.getKeyCode();

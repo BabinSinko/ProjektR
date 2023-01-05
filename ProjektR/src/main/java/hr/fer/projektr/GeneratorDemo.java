@@ -12,12 +12,12 @@ import hr.fer.projektr.game.utility.Physics;
 public class GeneratorDemo {
     public static void main(String[] args){
 
-        GameState state=new GameState();
+        GameState state=new GameState(1./60);
         Generator generator=new Generator(state);
 
         for (int k=0; k<500; k++){
 
-            Physics.moveEnemies(state.getEnemies(), state.getSpeed());
+            Physics.moveEnemies(state);
             generator.updateList();
 
             System.out.println(String.valueOf(k) + " ".repeat(5-noOfDigits(k)) + state.getEnemies());

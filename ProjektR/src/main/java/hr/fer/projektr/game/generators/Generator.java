@@ -14,7 +14,7 @@ import java.util.Random;
  */
 public class Generator {
 
-    private GameState gameState;
+    private final GameState gameState;
 
     /**
      * Nasumicno generirani broj.
@@ -23,14 +23,15 @@ public class Generator {
      */
     private int ticks;
 
+    private final Random rand;
     /**
      * konstruktor
      * @param gameState ...
      */
     public Generator(GameState gameState){
-        this.gameState=gameState;
-        Random rand=new Random();
-        ticks=rand.nextInt(31)+20;
+        this.gameState = gameState;
+        rand = new Random();
+        generateTicks();
     }
 
     /**
@@ -46,8 +47,6 @@ public class Generator {
             ticks--;
         }
         else{
-            Random rand=new Random();
-
             int noEnemy=rand.nextInt(20);
             if (noEnemy<5){
                 gameState.addEnemy(new Cactus(CactusType.SMALL));
@@ -61,8 +60,7 @@ public class Generator {
             else {
                 gameState.addEnemy(new Bird(rand.nextDouble()));
             }
-
-            ticks=rand.nextInt(31)+20;
+            generateTicks();
         }
     }
 
@@ -77,5 +75,9 @@ public class Generator {
                 gameState.removeEnemy(k--);
             }
         }
+    }
+
+    private void generateTicks(){
+        ticks = rand.nextInt((int) (50 / gameState.getSpeed()))+ (int)(3/gameState.STEP_DURATION);
     }
 }

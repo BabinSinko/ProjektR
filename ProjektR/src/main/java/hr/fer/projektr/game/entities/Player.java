@@ -23,11 +23,16 @@ public class Player extends Entity {
      */
     private double verticalSpeed;
 
+    private boolean hasLanded;
     /**
      * Constructor for the player. Takes no arguments and sets the vertical speed to 0.
      */
     public Player() {
         super(GameState.INITIAL_PLAYER_POSITION_X, GameState.INITIAL_PLAYER_POSITION_Y, GameState.PLAYER_WIDTH, GameState.PLAYER_HEIGHT, EntityType.PLAYER);
+        this.hasLanded = true;
+        this.verticalSpeed = 0;
+        this.isDucking = false;
+        this.isJumping = false;
     }
 
     @Override
@@ -67,6 +72,16 @@ public class Player extends Entity {
     public void influencePlayer(boolean duck, boolean jump){
         this.isDucking = duck;
         this.isJumping = jump;
+
+        if (getVerticalSpeed() == 0. && getPositionY() == GameState.INITIAL_PLAYER_POSITION_Y){
+            hasLanded = true;
+        }
+
+
+        if (getVerticalSpeed() != 0. && getPositionY() != GameState.INITIAL_PLAYER_POSITION_Y && this.isDucking && hasLanded){
+            this.verticalSpeed -= GameState.INITIAL_JUMP_SPEED/4;
+            hasLanded = false;
+        }
 
         //check if allowed to jump
         if (getPositionY() == GameState.INITIAL_PLAYER_POSITION_Y && !this.isDucking && this.isJumping){

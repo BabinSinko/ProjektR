@@ -2,37 +2,53 @@ package hr.fer.projektr.game.utility;
 
 import hr.fer.projektr.game.GameState;
 import hr.fer.projektr.game.entities.Enemy;
+import hr.fer.projektr.game.entities.Entity;
 import hr.fer.projektr.game.entities.Player;
 
+import java.awt.*;
 import java.util.List;
 
 public class Physics {
-
-
-    public void calculateVerticalVelocity(Player player, double g){
-        //TODO
-        //player.setVerticalSpeed();
-    }
-
-    public static void moveEnemies(List<Enemy> enemies, double amount){
-        for (Enemy enemy: enemies){
-            enemy.setPositionX(enemy.getPositionX() - amount * GameState.STEP_DURATION);
+    public static void moveEnemies(GameState gameState){
+        for (Enemy enemy: gameState.getEnemies()){
+            enemy.setPositionX(enemy.getPositionX() - gameState.getSpeed() * gameState.STEP_DURATION);
         }
     }
 
-    public static void playerUpdate(Player player){
+    public static void playerUpdate(GameState gameState){
         //ako ne nije u zraku i nema brzinu nema smisla izvrsavati fju
-        if (player.getVerticalSpeed() == 0. && player.getPositionY() == GameState.INITIAL_PLAYER_POSITION_Y){
+        if (gameState.getPlayer().getVerticalSpeed() == 0. && gameState.getPlayer().getPositionY() == GameState.INITIAL_PLAYER_POSITION_Y){
             return;
         }
 
-        if (player.getPositionY() + player.getVerticalSpeed() * GameState.STEP_DURATION > GameState.INITIAL_PLAYER_POSITION_Y){
-            player.setPositionY(GameState.INITIAL_PLAYER_POSITION_Y);
-            player.setVerticalSpeed(0.);
+        if (gameState.getPlayer().getPositionY() + gameState.getPlayer().getVerticalSpeed() * gameState.STEP_DURATION > GameState.INITIAL_PLAYER_POSITION_Y){
+            gameState.getPlayer().setPositionY(GameState.INITIAL_PLAYER_POSITION_Y);
+            gameState.getPlayer().setVerticalSpeed(0.);
         } else {
-            player.setPositionY(player.getPositionY() + player.getVerticalSpeed() * GameState.STEP_DURATION);
-            player.setVerticalSpeed(player.getVerticalSpeed() + GameState.GRAVITY * GameState.STEP_DURATION);
+            gameState.getPlayer().setPositionY(gameState.getPlayer().getPositionY() + gameState.getPlayer().getVerticalSpeed() * gameState.STEP_DURATION);
+            gameState.getPlayer().setVerticalSpeed(gameState.getPlayer().getVerticalSpeed() + GameState.GRAVITY * gameState.STEP_DURATION);
         }
+    }
+
+    public static boolean checkCollisions(GameState gameState){
+        for (Enemy enemy: gameState.getEnemies()){
+            if (areColliding(gameState.getPlayer(), enemy)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean areColliding(Entity first, Entity second){
+
+        if (first.getPositionY() + first.getHeight() < second.getPositionY() || second.getPositionY() + second.getHeight() < first.getPositionY()) {
+            return false;
+        }
+        if (first.getPositionX() + first.getWidth() < second.getPositionX() || second.getPositionX() + second.getWidth() < first.getPositionX()) {
+            return false;
+        }
+        return true;
+
     }
 
   //Sluzilo samo za isprobavanje skoka, mozda korisno za ubuduce, inace ignore ili delete

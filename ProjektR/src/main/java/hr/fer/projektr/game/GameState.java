@@ -1,16 +1,12 @@
 package hr.fer.projektr.game;
 
 import hr.fer.projektr.game.entities.Enemy;
-import hr.fer.projektr.game.entities.Entity;
 import hr.fer.projektr.game.entities.Player;
 import hr.fer.projektr.game.generators.Generator;
 import hr.fer.projektr.game.utility.Physics;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Class representing a game state.
@@ -47,18 +43,21 @@ public class GameState {
     //Constants relating to the game world
     public static final double GRAVITY = 2.;
     public static final double INITIAL_GAME_SPEED = 0.2;
-    public static final double STEP_DURATION = 0.01666666666;
+    public static final int SPEED_INCREASE_SCORE_THRESHOLD = 100;
+    public static final double SPEED_INCREASE_AMOUNT = 0.01;
+    public static final double SCORE_TO_DISTANCE_RAN_RATIO = 6.;
+    public final double STEP_DURATION;
 
 
     /**
      * The player in this game state
      */
-    private final Player player;
+    private Player player;
 
     /**
      * Present enemies in this game state
      */
-    private final List<Enemy> enemies;
+    private List<Enemy> enemies;
 
     /**
      * The current game speed (how fast is everything moving)
@@ -68,20 +67,19 @@ public class GameState {
     /**
      * The current score
      */
-    private long score;
+    private double distanceRan;
+
+    private boolean isRunning;
 
     private Generator generator;
 
     /**
      * Constructor for the game state, initializes everything by itself.
      */
-    public GameState() {
-        this.player = new Player();
-        this.enemies = new ArrayList<>();
-        this.gameSpeed = INITIAL_GAME_SPEED;
-        this.generator = new Generator(this);
-    }
 
+    public GameState(double stepDuration) {
+        this.STEP_DURATION = stepDuration;
+    }
     public Player getPlayer() {
     	return player;
     }
@@ -112,15 +110,39 @@ public class GameState {
      * For example moves the enemies, deals with the player movement and checks for collisions with the player.
      */
     public void step(){
-        //TODO pokretat generator, pozivat physics za entitete i provjeravati kolizije
-        Physics.playerUpdate(player);
-        Physics.moveEnemies(enemies, gameSpeed);
+        if (!isRunning){
+            return;
+        }
+
+        Physics.playerUpdate(this);
+        Physics.moveEnemies(this);
+
+        if (Physics.checkCollisions(this)){
+            isRunning = false;
+        }
+
         generator.updateList();
-        System.out.println(enemies);
+        int scoreBefore = this.getScore();
+        distanceRan += gameSpeed * STEP_DURATION;
+        if (this.getScore() > scoreBefore && this.getScore() % SPEED_INCREASE_SCORE_THRESHOLD == 0){
+            gameSpeed += SPEED_INCREASE_AMOUNT;
+        }
+        System.out.println(gameSpeed);
     }
 
-    //TODO
+    public void start(){
+        this.player = new Player();
+        this.enemies = new ArrayList<>();
+        this.gameSpeed = INITIAL_GAME_SPEED;
+        this.generator = new Generator(this);
+        this.distanceRan = 0.;
+        this.isRunning = true;
+    }
     public boolean isOver(){
-        return false;
+        return isRunning;
+    }
+
+    public int getScore() {
+        return (int) (distanceRan * SCORE_TO_DISTANCE_RAN_RATIO);
     }
 }
