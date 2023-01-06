@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import hr.fer.projektr.game.GameInterface;
-import hr.fer.projektr.game.GameState;
 import hr.fer.projektr.game.entities.Entity;
 
 public class DinosaurPanel extends JPanel implements ActionListener {
@@ -55,7 +54,7 @@ public class DinosaurPanel extends JPanel implements ActionListener {
 	
 	private void drawEntity(Graphics g, Entity entity) {
 		Image image = ei.getEntityImage(entity);
-		g.drawImage(image, convertWidth(entity.getPositionX()), convertHeight(entity.getPositionY() - entity.getHeight()), convertWidth(entity.getWidth()), convertHeight(entity.getHeight()), null);
+		g.drawImage(image, convertWidth(entity.getLeftX()), convertHeight(entity.getTopY()), convertWidth(entity.getWidth()), convertHeight(entity.getHeight()), null);
 	}
 	
 	private static int convertWidth(double width) {

@@ -48,12 +48,15 @@ public abstract class Entity {
         this.type = type;
     }
 
-    public double getPositionX() {
+    public double getLeftX() {
         return positionX;
     }
+    public double getRightX() {
+        return positionX + this.getWidth();
+    }
 
-    public double getPositionY() {
-        return positionY;
+    public double getTopY() {
+        return positionY - this.getHeight();
     }
 
     public double getWidth() {
@@ -68,8 +71,12 @@ public abstract class Entity {
         this.positionX = positionX;
     }
 
-    public void setPositionY(double positionY) {
+    public void setBottomPositionY(double positionY) {
         this.positionY = positionY;
+    }
+
+    public double getBottomY(){
+        return positionY;
     }
     
     public void setHeight(double height) {
@@ -86,6 +93,6 @@ public abstract class Entity {
      */
     @Override
     public String toString(){
-        return String.format("(width:%s, height:%s, x:%s, y:%s)", getWidth(), getHeight(), getPositionX(), getPositionY());
+        return String.format("(width:%s, height:%s, x:%s, y:%s)", getWidth(), getHeight(), getLeftX(), getTopY());
     }
 }

@@ -73,18 +73,18 @@ public class Player extends Entity {
         this.isDucking = duck;
         this.isJumping = jump;
 
-        if (getVerticalSpeed() == 0. && getPositionY() == GameState.INITIAL_PLAYER_POSITION_Y){
+        if (getVerticalSpeed() == 0. && getBottomY() == GameState.INITIAL_PLAYER_POSITION_Y){
             hasLanded = true;
         }
 
 
-        if (getVerticalSpeed() != 0. && getPositionY() != GameState.INITIAL_PLAYER_POSITION_Y && this.isDucking && hasLanded){
+        if (getVerticalSpeed() != 0. && getBottomY() != GameState.INITIAL_PLAYER_POSITION_Y && this.isDucking && hasLanded){
             this.verticalSpeed -= GameState.INITIAL_JUMP_SPEED/4;
             hasLanded = false;
         }
 
         //check if allowed to jump
-        if (getPositionY() == GameState.INITIAL_PLAYER_POSITION_Y && !this.isDucking && this.isJumping){
+        if (getBottomY() == GameState.INITIAL_PLAYER_POSITION_Y && !this.isDucking && this.isJumping){
             this.verticalSpeed = GameState.INITIAL_JUMP_SPEED;
         }
     }

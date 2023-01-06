@@ -3,29 +3,25 @@ package hr.fer.projektr.game.utility;
 import hr.fer.projektr.game.GameState;
 import hr.fer.projektr.game.entities.Enemy;
 import hr.fer.projektr.game.entities.Entity;
-import hr.fer.projektr.game.entities.Player;
-
-import java.awt.*;
-import java.util.List;
 
 public class Physics {
     public static void moveEnemies(GameState gameState){
         for (Enemy enemy: gameState.getEnemies()){
-            enemy.setPositionX(enemy.getPositionX() - gameState.getSpeed() * gameState.STEP_DURATION);
+            enemy.setPositionX(enemy.getLeftX() - gameState.getSpeed() * gameState.STEP_DURATION);
         }
     }
 
     public static void playerUpdate(GameState gameState){
         //ako ne nije u zraku i nema brzinu nema smisla izvrsavati fju
-        if (gameState.getPlayer().getVerticalSpeed() == 0. && gameState.getPlayer().getPositionY() == GameState.INITIAL_PLAYER_POSITION_Y){
+        if (gameState.getPlayer().getVerticalSpeed() == 0. && gameState.getPlayer().getBottomY() == GameState.INITIAL_PLAYER_POSITION_Y){
             return;
         }
 
-        if (gameState.getPlayer().getPositionY() + gameState.getPlayer().getVerticalSpeed() * gameState.STEP_DURATION > GameState.INITIAL_PLAYER_POSITION_Y){
-            gameState.getPlayer().setPositionY(GameState.INITIAL_PLAYER_POSITION_Y);
+        if (gameState.getPlayer().getBottomY() + gameState.getPlayer().getVerticalSpeed() * gameState.STEP_DURATION > GameState.INITIAL_PLAYER_POSITION_Y){
+            gameState.getPlayer().setBottomPositionY(GameState.INITIAL_PLAYER_POSITION_Y);
             gameState.getPlayer().setVerticalSpeed(0.);
         } else {
-            gameState.getPlayer().setPositionY(gameState.getPlayer().getPositionY() + gameState.getPlayer().getVerticalSpeed() * gameState.STEP_DURATION);
+            gameState.getPlayer().setBottomPositionY(gameState.getPlayer().getBottomY() + gameState.getPlayer().getVerticalSpeed() * gameState.STEP_DURATION);
             gameState.getPlayer().setVerticalSpeed(gameState.getPlayer().getVerticalSpeed() + GameState.GRAVITY * gameState.STEP_DURATION);
         }
     }
@@ -41,10 +37,10 @@ public class Physics {
 
     private static boolean areColliding(Entity first, Entity second){
 
-        if (first.getPositionY() + first.getHeight() < second.getPositionY() || second.getPositionY() + second.getHeight() < first.getPositionY()) {
+        if (first.getBottomY() < second.getTopY() || second.getBottomY() < first.getTopY()) {
             return false;
         }
-        if (first.getPositionX() + first.getWidth() < second.getPositionX() || second.getPositionX() + second.getWidth() < first.getPositionX()) {
+        if (first.getRightX() < second.getLeftX() || second.getRightX() < first.getLeftX()) {
             return false;
         }
         return true;
