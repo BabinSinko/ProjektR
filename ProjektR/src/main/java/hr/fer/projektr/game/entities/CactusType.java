@@ -14,7 +14,8 @@ public enum CactusType {
 
     SMALL(GameState.SMALL_CACTUS_WIDTH, GameState.SMALL_CACTUS_HEIGHT),
 
-    LARGE(GameState.LARGE_CACTUS_WIDTH, GameState.LARGE_CACTUS_HEIGHT);
+    LARGE(GameState.LARGE_CACTUS_WIDTH, GameState.LARGE_CACTUS_HEIGHT),
+    LONG(GameState.LONG_CACTUS_WIDTH, GameState.LONG_CACTUS_HEIGHT);
 
     final double width;
     final double height;

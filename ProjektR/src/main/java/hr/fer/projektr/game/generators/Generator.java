@@ -24,6 +24,7 @@ public class Generator {
     private int ticks;
 
     private final Random rand;
+
     /**
      * konstruktor
      * @param gameState ...
@@ -47,18 +48,25 @@ public class Generator {
             ticks--;
         }
         else{
-            int noEnemy=rand.nextInt(20);
-            if (noEnemy<5){
+            int noEnemy=rand.nextInt(25);
+            if (noEnemy<6){
                 gameState.addEnemy(new Cactus(CactusType.SMALL));
             }
-            else if (noEnemy<10){
+            else if (noEnemy<12){
                 gameState.addEnemy(new Cactus(CactusType.STANDARD));
             }
-            else if (noEnemy<15){
+            else if (noEnemy<18){
                 gameState.addEnemy(new Cactus(CactusType.LARGE));
             }
+            else if (noEnemy<20){
+                gameState.addEnemy(new Cactus(CactusType.LONG));
+            }
             else {
-                gameState.addEnemy(new Bird(rand.nextDouble()));
+                int birdY=rand.nextInt(3);
+                if (birdY==1) gameState.addEnemy(new Bird(GameState.MIN_BIRD_Y));
+                else if (birdY==2) gameState.addEnemy(new Bird(GameState.CENTER_BIRD_Y));
+                else gameState.addEnemy(new Bird(GameState.MAX_BIRD_Y));
+
             }
             generateTicks();
         }
