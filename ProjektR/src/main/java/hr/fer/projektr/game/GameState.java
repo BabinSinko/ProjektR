@@ -133,7 +133,7 @@ public class GameState {
         if (this.getScore() > scoreBefore && this.getScore() % SPEED_INCREASE_SCORE_THRESHOLD == 0){
             gameSpeed += SPEED_INCREASE_AMOUNT;
         }
-        System.out.println(player.toString());
+        //System.out.println(player.toString());
     }
 
     public void start(){
