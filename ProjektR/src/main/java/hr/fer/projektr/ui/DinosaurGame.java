@@ -20,6 +20,7 @@ public class DinosaurGame extends JFrame {
 	private final static int WIDTH = 1600;
 	private final static int HEIGHT = 950;
 	
+	public JPanel panel;
 
 	public DinosaurGame() {		
 		setLocation(0, 0);
@@ -31,10 +32,11 @@ public class DinosaurGame extends JFrame {
 	
 	private void initGui() {
 		GameInterface game = new GameInterface();
-		game.start();
-		addKeyListener(new InputListener(game));
-		JPanel panel = new DinosaurPanel(game);
+
+		DinosaurPanel panel = new DinosaurPanel(game);
 		add(panel);
+		
+		addKeyListener(new InputListener(game, panel));
 	}
 	
 
@@ -47,15 +49,17 @@ public class DinosaurGame extends JFrame {
 	
 	private static class InputListener extends KeyAdapter {
 		GameInterface game;
+		DinosaurPanel panel;
 		
-		public InputListener(GameInterface game) {
+		public InputListener(GameInterface game, DinosaurPanel panel) {
 			this.game = game;
+			this.panel = panel;
 		}
 		
 		@Override
 		public void keyPressed(KeyEvent e) {
 			int key = e.getKeyCode();
-			
+
 			switch (key) {
 			case 38:
 				game.input(false, true);
@@ -65,6 +69,11 @@ public class DinosaurGame extends JFrame {
 				game.input(true, false);
 				break;
 
+			case 32:
+				if (game.isOver()) {
+					panel.gameStart();
+				}
+				
 			default:
 				break;
 			}

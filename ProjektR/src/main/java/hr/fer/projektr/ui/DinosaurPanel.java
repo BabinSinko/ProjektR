@@ -11,8 +11,6 @@ import hr.fer.projektr.game.GameInterface;
 import hr.fer.projektr.game.entities.Entity;
 
 public class DinosaurPanel extends JPanel implements ActionListener {
-	private final static int WIDTH = 1600;
-	private final static int HEIGHT = 900;
 	private final static int DELAY = 10;
 	
 	private static final long serialVersionUID = 1L;
@@ -25,14 +23,21 @@ public class DinosaurPanel extends JPanel implements ActionListener {
 		this.game = game;
 		ei = new EntityImage();
         timer = new Timer(DELAY, this);
+        
 		gameStart();
 	}
 	
-	private void gameStart() {
+	public void gameStart() {
+		game.start();
         timer.start();
 	}
 	
 	private void render() {
+		if (game.isOver()) {
+			timer.stop();
+			return;
+		}
+		
 		game.step();
 		repaint();
 	}
@@ -50,6 +55,13 @@ public class DinosaurPanel extends JPanel implements ActionListener {
 		for (Entity entity : game.getEnemies()) {
 			drawEntity(g, entity);
 		}
+		
+		Insets insets = getInsets();
+		int width = getWidth() - (insets.left + insets.right);
+		
+		FontMetrics fm = getFontMetrics(getFont());
+		
+		g.drawString(Integer.toString(game.getScore()), width - fm.stringWidth(Integer.toString(game.getScore())), fm.getAscent());
 	}
 	
 	private void drawEntity(Graphics g, Entity entity) {
@@ -57,12 +69,18 @@ public class DinosaurPanel extends JPanel implements ActionListener {
 		g.drawImage(image, convertWidth(entity.getLeftX()), convertHeight(entity.getTopY()), convertWidth(entity.getWidth()), convertHeight(entity.getHeight()), null);
 	}
 	
-	private static int convertWidth(double width) {
-		return (int) (width * (WIDTH - 1));
+	private int convertWidth(double width) {
+		Insets insets = getInsets();
+		int widthComp = getWidth() - (insets.left + insets.right);
+		
+		return (int) (width * (widthComp - 1));
 	}
 	
-	private static int convertHeight(double height) {
-		return (int) (height * (HEIGHT - 1));
+	private int convertHeight(double height) {
+		Insets insets = getInsets();
+		int heightComp = getHeight() - (insets.top + insets.bottom);
+		
+		return (int) (height * (heightComp - 1));
 	}
 
 	@Override

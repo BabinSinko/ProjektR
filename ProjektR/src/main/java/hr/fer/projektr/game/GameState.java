@@ -145,7 +145,7 @@ public class GameState {
         this.isRunning = true;
     }
     public boolean isOver(){
-        return isRunning;
+        return !isRunning;
     }
 
     public int getScore() {
