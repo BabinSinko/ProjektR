@@ -33,7 +33,7 @@ public class GameState {
     public static final double LARGE_CACTUS_WIDTH = 0.12;
     public static final double LARGE_CACTUS_HEIGHT = 0.15;
     public static final double LONG_CACTUS_WIDTH = 0.05;
-    public static final double LONG_CACTUS_HEIGHT = 0.5;
+    public static final double LONG_CACTUS_HEIGHT = 0.40;
 
     //Constants relating to the bird enemies
     public static final double BIRD_WIDTH = 0.15;
