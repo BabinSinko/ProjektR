@@ -79,7 +79,7 @@ public class Generator {
         List<Enemy> enemies=gameState.getEnemies();
         for (int k=0; k<enemies.size(); ++k){
             Enemy enemy=enemies.get(k);
-            if ( enemy.getLeftX() + enemy.getWidth() <= 0 ) {
+            if ( enemy.getLeftX() + enemy.getWidth() <= 0 - enemy.getWidth() ) {
                 gameState.removeEnemy(k--);
             }
         }

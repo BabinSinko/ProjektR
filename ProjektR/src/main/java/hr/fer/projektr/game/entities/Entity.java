@@ -52,7 +52,7 @@ public abstract class Entity {
         return positionX;
     }
     public double getRightX() {
-        return positionX + this.getWidth();
+        return this.getLeftX() + this.getWidth();
     }
 
     public double getTopY() {

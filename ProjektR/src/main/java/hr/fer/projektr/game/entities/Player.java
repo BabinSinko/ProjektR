@@ -1,7 +1,5 @@
 package hr.fer.projektr.game.entities;
 
-import java.awt.Graphics;
-
 import hr.fer.projektr.game.GameState;
 
 /**
@@ -28,7 +26,7 @@ public class Player extends Entity {
      * Constructor for the player. Takes no arguments and sets the vertical speed to 0.
      */
     public Player() {
-        super(GameState.INITIAL_PLAYER_POSITION_X, GameState.INITIAL_PLAYER_POSITION_Y, GameState.PLAYER_WIDTH, GameState.PLAYER_HEIGHT, EntityType.PLAYER);
+        super(GameState.PLAYER_POSITION_X, GameState.INITIAL_PLAYER_POSITION_Y, GameState.PLAYER_WIDTH, GameState.PLAYER_HEIGHT, EntityType.PLAYER);
         this.hasLanded = true;
         this.verticalSpeed = 0;
         this.isDucking = false;
@@ -38,10 +36,30 @@ public class Player extends Entity {
     @Override
     public double getHeight() {
         if (isDucking){
-            return GameState.PLAYER_CROUCH_HEIGHT;
+            return GameState.PLAYER_DUCKING_HEIGHT;
         }
         else {
-            return super.getHeight();
+            return GameState.PLAYER_HEIGHT;
+        }
+    }
+
+    @Override
+    public double getWidth() {
+        if (isDucking){
+            return GameState.PLAYER_DUCKING_WIDTH;
+        }
+        else {
+            return GameState.PLAYER_WIDTH;
+        }
+    }
+
+    @Override
+    public double getLeftX() {
+        if (isDucking){
+            return GameState.PLAYER_DUCKING_POSITION_X;
+        }
+        else {
+            return GameState.PLAYER_POSITION_X;
         }
     }
 

@@ -1,6 +1,7 @@
 package hr.fer.projektr.ui;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -16,15 +17,17 @@ public class EntityImage {
 	private Image cactusStandardImage;
 	private Image cactusLargeImage;
 	private Image birdImage;
+	private Image cactusSvenImage;
 	
 	public EntityImage() {
 		try {
-			this.playerImage = ImageIO.read(getClass().getClassLoader().getResource("dinosaur.png"));
-			this.playerDuckingImage = ImageIO.read(getClass().getClassLoader().getResource("dinosaur_ducking.png"));
-			this.cactusSmallImage = ImageIO.read(getClass().getClassLoader().getResource("bird.png"));
-			this.cactusStandardImage = ImageIO.read(getClass().getClassLoader().getResource("bird.png"));
-			this.cactusLargeImage = ImageIO.read(getClass().getClassLoader().getResource("bird.png"));
-			this.birdImage = ImageIO.read(getClass().getClassLoader().getResource("bird.png"));
+			this.playerImage = ImageIO.read(getClass().getClassLoader().getResource("Dino.png"));
+			this.playerDuckingImage = ImageIO.read(getClass().getClassLoader().getResource("DinoDucking.png"));
+			this.cactusSmallImage = ImageIO.read(getClass().getClassLoader().getResource("CactusSmall.png"));
+			this.cactusStandardImage = ImageIO.read(getClass().getClassLoader().getResource("CactusStandard.png"));
+			this.cactusLargeImage = ImageIO.read(getClass().getClassLoader().getResource("CactusLarge.png"));
+			this.cactusSvenImage = ImageIO.read(getClass().getClassLoader().getResource("CactusSven.png"));
+			this.birdImage = ImageIO.read(getClass().getClassLoader().getResource("Bird.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -50,12 +53,25 @@ public class EntityImage {
 				
 			case CACTUS_LARGE:
 				return cactusLargeImage;
-				
+
+			case CACTUS_LONG:
+				return cactusSvenImage;
+
 			case BIRD:
 				return birdImage;
 				
 			default:
 				return null;
 		}
+	}
+
+	public double getWidthAdjustments(Entity entity){
+
+		if (entity.getEntityType().equals(EntityType.PLAYER) && ((Player) entity).isDucking()){
+			return 0;
+		}
+
+		BufferedImage entityImage = (BufferedImage) getEntityImage(entity);
+		return (entity.getHeight() * entityImage.getWidth() / entityImage.getHeight() - entity.getWidth()) / 2;
 	}
 }

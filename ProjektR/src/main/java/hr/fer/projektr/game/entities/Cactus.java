@@ -26,7 +26,7 @@ public class Cactus extends Enemy{
     public Cactus(CactusType cactusType){
     	// TODO
     	// EntityType
-        super(GameState.INITIAL_CACTUS_POSITION_X, GameState.INITIAL_CACTUS_POSITION_Y, cactusType.width, cactusType.height, EntityType.CACTUS_STANDARD);
+        super(GameState.INITIAL_CACTUS_POSITION_X, GameState.INITIAL_CACTUS_POSITION_Y, cactusType.width, cactusType.height, cactusType.entityType);
     }
 
 

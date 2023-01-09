@@ -4,8 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JPanel;
-import javax.swing.Timer;
+import javax.swing.*;
 
 import hr.fer.projektr.game.GameInterface;
 import hr.fer.projektr.game.entities.Entity;
@@ -23,7 +22,7 @@ public class DinosaurPanel extends JPanel implements ActionListener {
 		this.game = game;
 		ei = new EntityImage();
         timer = new Timer(DELAY, this);
-        
+
 		gameStart();
 	}
 	
@@ -52,8 +51,10 @@ public class DinosaurPanel extends JPanel implements ActionListener {
 		 */
 		Toolkit.getDefaultToolkit().sync();
 		drawEntity(g, game.getPlayer());
+		drawCollider(g, game.getPlayer());
 		for (Entity entity : game.getEnemies()) {
 			drawEntity(g, entity);
+			drawCollider(g, entity);
 		}
 		
 		Insets insets = getInsets();
@@ -66,21 +67,39 @@ public class DinosaurPanel extends JPanel implements ActionListener {
 	
 	private void drawEntity(Graphics g, Entity entity) {
 		Image image = ei.getEntityImage(entity);
-		g.drawImage(image, convertWidth(entity.getLeftX()), convertHeight(entity.getTopY()), convertWidth(entity.getWidth()), convertHeight(entity.getHeight()), null);
+		double widthAdjustment = ei.getWidthAdjustments(entity);
+		g.drawImage(image, convertWidth(entity.getLeftX() - widthAdjustment),
+							convertHeight(entity.getTopY()),
+							convertWidth(entity.getWidth() + 2*widthAdjustment),
+							convertHeight(entity.getHeight()),
+				null);
 	}
-	
+
+	private void drawCollider(Graphics g, Entity entity){
+		g.setColor(Color.RED);
+		g.drawRect(convertWidth(entity.getLeftX()), convertHeight(entity.getTopY()), convertWidth(entity.getWidth()), convertHeight(entity.getHeight()));
+		g.setColor(Color.BLACK);
+	}
+
 	private int convertWidth(double width) {
 		Insets insets = getInsets();
 		int widthComp = getWidth() - (insets.left + insets.right);
-		
+
 		return (int) (width * (widthComp - 1));
 	}
 	
 	private int convertHeight(double height) {
 		Insets insets = getInsets();
 		int heightComp = getHeight() - (insets.top + insets.bottom);
-		
+
 		return (int) (height * (heightComp - 1));
+	}
+
+	private int scaleSize(double size) {
+		Insets insets = getInsets();
+		int length = Math.min(getWidth() - (insets.left + insets.right), getHeight() - (insets.top + insets.bottom));
+
+		return (int) (size * (length - 1));
 	}
 
 	@Override
