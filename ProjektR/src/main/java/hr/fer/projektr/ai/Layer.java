@@ -18,6 +18,8 @@ public class Layer {
      * @param activationFunction ActivationFunction to be applied in neurons of this layer
      */
     public Layer(int layerSize, ActivationFunction activationFunction) {
+        if (layerSize < 1) throw new IllegalArgumentException("layerSize can't be less than 1");
+
         this.layerSize = layerSize;
         this.activationFunction = activationFunction;
         this.isInitialized = false;

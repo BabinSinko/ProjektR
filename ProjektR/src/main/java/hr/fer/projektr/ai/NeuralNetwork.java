@@ -12,6 +12,9 @@ public class NeuralNetwork {
      * @param layers Layer[] containing hidden layers and output layer
      */
     NeuralNetwork(int inputSize, Layer... layers) {
+        if (inputSize < 1) throw new IllegalArgumentException("Neural network must have at least one input");
+        if (layers.length < 1) throw new IllegalArgumentException("Neural network must have at least one layer");
+
         this.inputSize = inputSize;
         this.layers = layers;
     };
