@@ -18,6 +18,7 @@ public class EntityImage {
 	private Image cactusLargeImage;
 	private Image birdImage;
 	private Image cactusSvenImage;
+	private Image coinImage;
 	
 	public EntityImage() {
 		try {
@@ -28,6 +29,7 @@ public class EntityImage {
 			this.cactusLargeImage = ImageIO.read(getClass().getClassLoader().getResource("CactusLarge.png"));
 			this.cactusSvenImage = ImageIO.read(getClass().getClassLoader().getResource("CactusSven.png"));
 			this.birdImage = ImageIO.read(getClass().getClassLoader().getResource("Bird.png"));
+			this.coinImage = ImageIO.read(getClass().getClassLoader().getResource("Coin.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -59,7 +61,8 @@ public class EntityImage {
 
 			case BIRD:
 				return birdImage;
-				
+			case COIN:
+				return coinImage;
 			default:
 				return null;
 		}

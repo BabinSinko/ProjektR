@@ -1,10 +1,7 @@
 package hr.fer.projektr.game.generators;
 
 import hr.fer.projektr.game.GameState;
-import hr.fer.projektr.game.entities.Bird;
-import hr.fer.projektr.game.entities.Cactus;
-import hr.fer.projektr.game.entities.CactusType;
-import hr.fer.projektr.game.entities.Enemy;
+import hr.fer.projektr.game.entities.*;
 
 import java.util.List;
 import java.util.Random;
@@ -48,7 +45,7 @@ public class Generator {
             ticks--;
         }
         else{
-            int noEnemy=rand.nextInt(25);
+            int noEnemy=rand.nextInt(26);
             if (noEnemy<6){
                 gameState.addEnemy(new Cactus(CactusType.SMALL));
             }
@@ -61,12 +58,17 @@ public class Generator {
             else if (noEnemy<20){
                 gameState.addEnemy(new Cactus(CactusType.LONG));
             }
+            else if (noEnemy < 23) {
+                int coinY=rand.nextInt(3);
+                if (coinY==1) gameState.addEnemy(new Coin(GameState.MIN_COIN_Y));
+                else if (coinY==2) gameState.addEnemy(new Coin(GameState.CENTER_COIN_Y));
+                else gameState.addEnemy(new Coin(GameState.MAX_COIN_Y));
+            }
             else {
                 int birdY=rand.nextInt(3);
                 if (birdY==1) gameState.addEnemy(new Bird(GameState.MIN_BIRD_Y));
                 else if (birdY==2) gameState.addEnemy(new Bird(GameState.CENTER_BIRD_Y));
                 else gameState.addEnemy(new Bird(GameState.MAX_BIRD_Y));
-
             }
             generateTicks();
         }
@@ -76,11 +78,9 @@ public class Generator {
      * Ako se prepreka vise ne vidi, mice se iz liste neprijatelja;
      */
     private void removeEnemies(){
-        List<Enemy> enemies=gameState.getEnemies();
-        for (int k=0; k<enemies.size(); ++k){
-            Enemy enemy=enemies.get(k);
+        for (Enemy enemy: gameState.getEnemies()){
             if ( enemy.getLeftX() + enemy.getWidth() <= 0 - enemy.getWidth() ) {
-                gameState.removeEnemy(k--);
+                gameState.addToBeRemoved(enemy);
             }
         }
     }

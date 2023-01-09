@@ -6,7 +6,9 @@ import hr.fer.projektr.game.generators.Generator;
 import hr.fer.projektr.game.utility.Physics;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Class representing a game state.
@@ -47,11 +49,18 @@ public class GameState {
     public static final double BIRD_HEIGHT = PLAYER_HEIGHT * 52/86;
     public static final double BIRD_WIDTH = BIRD_HEIGHT * 84/52;
     public static final double INITIAL_BIRD_POSITION_X = 1;
-    public static final double DEFAULT_INITIAL_BIRD_POSITION_Y = 0;
     public static final double MIN_BIRD_Y = 1;
     public static final double MAX_BIRD_Y = 1-0.5*GameState.INITIAL_JUMP_SPEED*GameState.INITIAL_JUMP_SPEED/GameState.GRAVITY;
     public static final double CENTER_BIRD_Y = 1 - PLAYER_DUCKING_HEIGHT - 0.02;
 
+    //Constants relating to the bird enemies
+    public static final double COIN_HEIGHT = PLAYER_HEIGHT * 52/86;
+    public static final double COIN_WIDTH = COIN_HEIGHT;
+    public static final double INITIAL_COIN_POSITION_X = 1;
+    public static final double MIN_COIN_Y = 1;
+    public static final double MAX_COIN_Y = 1-0.5*GameState.INITIAL_JUMP_SPEED*GameState.INITIAL_JUMP_SPEED/GameState.GRAVITY;
+    public static final double CENTER_COIN_Y = 1 - PLAYER_DUCKING_HEIGHT - 0.02;
+    public static final double COIN_SCORE_VALUE = 25;
 
     //Constants relating to the game world
     public static final double GRAVITY = 1.3;
@@ -128,8 +137,9 @@ public class GameState {
      */
     private double distanceRan;
 
+    private int coinsCollected;
     private boolean isRunning;
-
+    private Set<Enemy> toBeRemoved;
     private Generator generator;
 
     /**
@@ -187,22 +197,36 @@ public class GameState {
         if (this.getScore() > scoreBefore && this.getScore() % SPEED_INCREASE_SCORE_THRESHOLD == 0){
             gameSpeed += SPEED_INCREASE_AMOUNT;
         }
+
+        for (Enemy enemy: this.toBeRemoved){
+            this.enemies.remove(enemy);
+        }
         //System.out.println(player.toString());
     }
 
     public void start(){
         this.player = new Player();
         this.enemies = new ArrayList<>();
+        this.toBeRemoved = new HashSet<>();
         this.gameSpeed = INITIAL_GAME_SPEED;
         this.generator = new Generator(this);
         this.distanceRan = 0.;
         this.isRunning = true;
+        this.coinsCollected = 0;
     }
     public boolean isOver(){
         return !isRunning;
     }
 
     public int getScore() {
-        return (int) (distanceRan * SCORE_TO_DISTANCE_RAN_RATIO);
+        return (int) (distanceRan * SCORE_TO_DISTANCE_RAN_RATIO + coinsCollected * COIN_SCORE_VALUE);
+    }
+
+    public void coinCollected(){
+        this.coinsCollected++;
+    }
+
+    public void addToBeRemoved(Enemy enemy){
+        this.toBeRemoved.add(enemy);
     }
 }

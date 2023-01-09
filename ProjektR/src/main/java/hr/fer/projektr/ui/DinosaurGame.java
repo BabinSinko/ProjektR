@@ -17,7 +17,7 @@ public class DinosaurGame extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private final static int WIDTH = 1600;
+	private final static int WIDTH = 950;
 	private final static int HEIGHT = 950;
 	
 	public JPanel panel;

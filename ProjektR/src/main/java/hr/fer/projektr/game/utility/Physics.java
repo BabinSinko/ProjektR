@@ -3,6 +3,7 @@ package hr.fer.projektr.game.utility;
 import hr.fer.projektr.game.GameState;
 import hr.fer.projektr.game.entities.Enemy;
 import hr.fer.projektr.game.entities.Entity;
+import hr.fer.projektr.game.entities.EntityType;
 
 public class Physics {
     public static void moveEnemies(GameState gameState){
@@ -29,9 +30,15 @@ public class Physics {
     public static boolean checkCollisions(GameState gameState){
         for (Enemy enemy: gameState.getEnemies()){
             if (areColliding(gameState.getPlayer(), enemy)){
-                return true;
+                if (enemy.getEntityType() == EntityType.COIN){
+                    gameState.coinCollected();
+                    gameState.addToBeRemoved(enemy);
+                } else {
+                    return true;
+                }
             }
         }
+
         return false;
     }
 
