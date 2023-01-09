@@ -23,7 +23,7 @@ public class EntityImage {
 	public EntityImage() {
 		try {
 			this.playerImage = ImageIO.read(getClass().getClassLoader().getResource("Dino.png"));
-			this.playerDuckingImage = ImageIO.read(getClass().getClassLoader().getResource("DinoDucking.png"));
+			this.playerDuckingImage = ImageIO.read(getClass().getClassLoader().getResource("DinoDucking1.png"));
 			this.cactusSmallImage = ImageIO.read(getClass().getClassLoader().getResource("CactusSmall.png"));
 			this.cactusStandardImage = ImageIO.read(getClass().getClassLoader().getResource("CactusStandard.png"));
 			this.cactusLargeImage = ImageIO.read(getClass().getClassLoader().getResource("CactusLarge.png"));
