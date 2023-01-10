@@ -76,7 +76,7 @@ public class NetworkUtil {
     /**
      * Mutates the neural network by changing some elements of layers' weights and biases
      * @param neuralNetwork NeuralNetwork to be mutated
-     * @param mutationChance double change each weight and bias has to be mutated, it is advisable
+     * @param mutationChance double chance each weight and bias has to be mutated, it is advisable
      *                       that it is not larger than 0.05
      */
     public static void mutate(NeuralNetwork neuralNetwork, double mutationChance) {
