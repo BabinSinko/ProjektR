@@ -1,5 +1,7 @@
 package hr.fer.projektr.ai;
 
+import org.ejml.simple.SimpleMatrix;
+
 import java.util.Random;
 
 public class NetworkUtil {
@@ -27,8 +29,8 @@ public class NetworkUtil {
 
         
         for(int layerCount = 0; layerCount < parents[0].getLayers().length; layerCount++){
-            int currentLayerRowLen = parents[0].getLayers()[layerCount].getWeights().length;
-            int currentLayerColLen =  parents[0].getLayers()[layerCount].getWeights()[0].length;
+            int currentLayerRowLen = parents[0].getLayers()[layerCount].getWeights().numRows();
+            int currentLayerColLen =  parents[0].getLayers()[layerCount].getWeights().numCols();
 
             int layerSize = parents[0].getLayers()[layerCount].getLayerSize();
             double[][] childLayerWeights = new double[currentLayerRowLen][currentLayerColLen];
@@ -61,7 +63,7 @@ public class NetworkUtil {
                 }
             }
 
-            childLayers[layerCount] = new Layer(layerSize , childLayerWeights, childLayerBiases, new ActivationFunction());
+            childLayers[layerCount] = new Layer(layerSize , childLayerWeights, childLayerBiases, ActivationFunction());
         }
 
         NeuralNetwork child = new NeuralNetwork(inputSize, childLayers);
@@ -96,12 +98,12 @@ public class NetworkUtil {
      * @param matrix {@code double[][]} to be mutated
      * @param mutationChance {@code double} chance each element of the matrix has to be mutated
      */
-    protected static void mutateMatrixNormalDistribution(double[][] matrix, double mutationChance) {
+    protected static void mutateMatrixNormalDistribution(SimpleMatrix matrix, double mutationChance) {
         Random rand = new Random();
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
+        for (int i = 0; i < matrix.numRows(); i++) {
+            for (int j = 0; j < matrix.numCols(); j++) {
                 if (Math.random() < mutationChance) {
-                    matrix[i][j] += rand.nextGaussian();
+                    matrix.set(i, j, matrix.get(i, j) + rand.nextGaussian());
                 }
             }
         }

@@ -1,6 +1,7 @@
 package hr.fer.projektr.ai;
 
-import java.util.Arrays;
+import org.ejml.simple.SimpleMatrix;
+
 import java.util.Random;
 
 /**
@@ -11,8 +12,8 @@ public class Layer {
 
     private int layerSize;
     private ActivationFunction activationFunction;
-    private double[][] weights;
-    private double[][] biases;
+    private SimpleMatrix weights;
+    private SimpleMatrix biases;
     private boolean isInitialized;
 
     /**
@@ -28,7 +29,7 @@ public class Layer {
         this.isInitialized = false;
     }
 
-    public Layer(int layerSize, double[][] weights, double[][] biases, ActivationFunction activationFunction){
+    public Layer(int layerSize, SimpleMatrix weights, SimpleMatrix biases, ActivationFunction activationFunction){
         if (layerSize < 1) throw new IllegalArgumentException("layerSize can't be less than 1");
 
         this.layerSize = layerSize;
@@ -50,11 +51,11 @@ public class Layer {
         return activationFunction;
     }
 
-    public double[][] getWeights() {
+    public SimpleMatrix getWeights() {
         return weights;
     }
 
-    public double[][] getBiases() {
+    public SimpleMatrix getBiases() {
         return biases;
     }
 
@@ -74,8 +75,8 @@ public class Layer {
     public void initializeLayer(int prevLayerSize) {
         if (prevLayerSize < 1) throw new IllegalArgumentException("PrevLayerSize can't be less than 1");
 
-        weights = new double[layerSize][prevLayerSize];
-        biases = new double[layerSize][1];
+        weights = new SimpleMatrix(new double[layerSize][prevLayerSize]);
+        biases = new SimpleMatrix(new double[layerSize][1]);
 
         initializeMatrix(weights, prevLayerSize);
         initializeMatrix(biases, prevLayerSize);
@@ -88,14 +89,14 @@ public class Layer {
      * @param matrix double[][]
      * @param prevLayerSize int number of inputs to this layer
      */
-    private void initializeMatrix(double[][] matrix, int prevLayerSize) {
+    private void initializeMatrix(SimpleMatrix matrix, int prevLayerSize) {
         Random rand = new Random();
         double max = 2.4 / prevLayerSize;
         double min = - max;
 
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; i++) {
-                matrix[i][j] = rand.nextDouble(max - min + 1) + min;
+        for (int i = 0; i < matrix.numRows(); i++) {
+            for (int j = 0; j < matrix.numCols(); i++) {
+                matrix.set(i, j, rand.nextDouble(max - min + 1) + min);
             }
         }
     }
@@ -103,8 +104,8 @@ public class Layer {
     @Override
     public String toString() {
         return "Layer{" +
-                "weights=" + Arrays.toString(weights) +
-                ", biases=" + Arrays.toString(biases) +
+                "weights=" + weights +
+                ", biases=" + biases +
                 '}';
     }
 }
