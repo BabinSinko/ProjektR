@@ -63,7 +63,7 @@ public class NetworkUtil {
                 }
             }
 
-            childLayers[layerCount] = new Layer(layerSize , childLayerWeights, childLayerBiases, ActivationFunction());
+            childLayers[layerCount] = new Layer(layerSize , childLayerWeights, childLayerBiases, ActivationFunctionApplier);
         }
 
         NeuralNetwork child = new NeuralNetwork(inputSize, childLayers);

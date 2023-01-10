@@ -16,8 +16,8 @@ public class Training {
         for (int i = 0; i < populationSize; i++) {
             NeuralNetwork network = new NeuralNetwork(
                     3,
-                    new Layer(5, ActivationFunction.SIGMOID),
-                    new Layer(3, ActivationFunction.NET), // 3 output neurons because dino can jump/duck/do nothing
+                    new Layer(5, ActivationFunctionAppliers.Sigmoid),
+                    new Layer(3, ActivationFunctionAppliers.Net) // 3 output neurons because dino can jump/duck/do nothing
             );
 
             network.initializeNetwork();

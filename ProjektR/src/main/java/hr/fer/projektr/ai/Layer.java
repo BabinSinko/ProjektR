@@ -11,7 +11,7 @@ import java.util.Random;
 public class Layer {
 
     private int layerSize;
-    private ActivationFunction activationFunction;
+    private ActivationFunctionApplier activationFunction;
     private SimpleMatrix weights;
     private SimpleMatrix biases;
     private boolean isInitialized;
@@ -21,7 +21,7 @@ public class Layer {
      * @param layerSize int number of neurons in the layer
      * @param activationFunction ActivationFunction to be applied in neurons of this layer
      */
-    public Layer(int layerSize, ActivationFunction activationFunction) {
+    public Layer(int layerSize, ActivationFunctionApplier activationFunction) {
         if (layerSize < 1) throw new IllegalArgumentException("layerSize can't be less than 1");
 
         this.layerSize = layerSize;
@@ -29,7 +29,7 @@ public class Layer {
         this.isInitialized = false;
     }
 
-    public Layer(int layerSize, SimpleMatrix weights, SimpleMatrix biases, ActivationFunction activationFunction){
+    public Layer(int layerSize, SimpleMatrix weights, SimpleMatrix biases, ActivationFunctionApplier activationFunction){
         if (layerSize < 1) throw new IllegalArgumentException("layerSize can't be less than 1");
 
         this.layerSize = layerSize;
@@ -47,7 +47,7 @@ public class Layer {
         return layerSize;
     }
 
-    public ActivationFunction getActivationFunction() {
+    public ActivationFunctionApplier getActivationFunction() {
         return activationFunction;
     }
 

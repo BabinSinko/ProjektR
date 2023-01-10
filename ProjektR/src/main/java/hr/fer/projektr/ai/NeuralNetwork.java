@@ -1,5 +1,7 @@
 package hr.fer.projektr.ai;
 
+import org.ejml.simple.SimpleMatrix;
+
 import java.util.Arrays;
 
 /**
@@ -50,28 +52,33 @@ public class NeuralNetwork {
 
     /**
      * Computes the forward propagation of the neural network
-     * @param input double[][1] vector of doubles representing the input for which to calculate forward propagation
-     * @return int index of output layer neuron with highest value (the decision based on input)
+     * @param input SimpleMatrix[][1] vector of doubles representing the input for which to calculate forward propagation
+     * @return int index of output layer neuron with the highest value (the decision based on input)
      */
-    public int computeForwardProp(double[][] input) {
+    public int computeForwardProp(SimpleMatrix input) {
+        if (input.numCols() != 1) throw new IllegalArgumentException("Input must be a one column matrix");
 
-        //todo
-        //our input will be double[3][1]
-        //first component tells the height of the object in front, second the distance to it, third the current speed of the game
-        //once again this could be a double[], depending on the matrix multiplication library support
-        //same logic will be applied for the rest of the document
+        SimpleMatrix prevLayerOutput = input;
+        SimpleMatrix currLayerOutput;
 
-        double[][] prevLayerOutput = input;
-        double[][] layerOutput;
-
+        // compute forward prop
         for(Layer l : layers) {
-            layerOutput = f(l.getWeights() * prevLayerOutput + l.getBiases());    //where f is layer.activationFunction that will
-                                                                                //be applied to every element of output matrix
+            ActivationFunctionApplier activationFunction = l.getActivationFunction();
+            currLayerOutput = activationFunction.apply(l.getWeights().mult(prevLayerOutput).plus(l.getBiases()));
 
-            prevLayerOutput = layerOutput //just keep in mind these might not be the same size
+            prevLayerOutput = currLayerOutput;
         }
 
-        return "index of layerOutput component which has the highest value";
+        // find the decision from final layer
+        int ind = 0;
+        double highestVal = prevLayerOutput.get(0,0);
+        for (int i = 0; i < prevLayerOutput.numRows(); i++) {
+            if (prevLayerOutput.get(i, 0) > highestVal) {
+                highestVal = prevLayerOutput.get(i, 0);
+                ind = i;
+            }
+        }
+        return ind;
     }
 
 
