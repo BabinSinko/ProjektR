@@ -1,5 +1,8 @@
 package hr.fer.projektr.ai;
 
+import java.util.Arrays;
+import java.util.Random;
+
 /**
  * Class representing a single layer of neural network
  * Each Layer has a matrix of weights and biases and an activation function
@@ -63,16 +66,45 @@ public class Layer {
         return isInitialized;
     }
 
+    /**
+     * Fill weights and biases matrices with random values from uniform distribution in [-2.4/n, 2.4/n]
+     * where n is the number of inputs to the layer (prevLayerSize)
+     * @param prevLayerSize int number of inputs to this layer
+     */
+    public void initializeLayer(int prevLayerSize) {
+        if (prevLayerSize < 1) throw new IllegalArgumentException("PrevLayerSize can't be less than 1");
 
-    void initializeLayer(int prevLayerSize) {
         weights = new double[layerSize][prevLayerSize];
         biases = new double[layerSize][1];
 
-        //todo
-        //fill both with random values from uniform distribution in [-2.4/n, 2.4/n]
-        // where n is the number of inputs to the layer (prevLayerSize)
+        initializeMatrix(weights, prevLayerSize);
+        initializeMatrix(biases, prevLayerSize);
 
         isInitialized = true;
     }
 
+    /**
+     * Helper method to initialize matrix random values from uniform distribution in [-2.4/n, 2.4/n]
+     * @param matrix double[][]
+     * @param prevLayerSize int number of inputs to this layer
+     */
+    private void initializeMatrix(double[][] matrix, int prevLayerSize) {
+        Random rand = new Random();
+        double max = 2.4 / prevLayerSize;
+        double min = - max;
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; i++) {
+                matrix[i][j] = rand.nextDouble(max - min + 1) + min;
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Layer{" +
+                "weights=" + Arrays.toString(weights) +
+                ", biases=" + Arrays.toString(biases) +
+                '}';
+    }
 }

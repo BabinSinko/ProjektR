@@ -1,5 +1,7 @@
 package hr.fer.projektr.ai;
 
+import java.util.Arrays;
+
 /**
  * Class representing a neural network
  */
@@ -72,4 +74,14 @@ public class NeuralNetwork {
         return "index of layerOutput component which has the highest value";
     }
 
+
+    @Override
+    public String toString() {
+        System.out.println("Neural Network");
+        for (int i = 0; i < layers.length; i++) {
+            System.out.println("Layer #" + i+1);
+            System.out.println(layers[i].toString());
+            System.out.println();
+        }
+    }
 }
