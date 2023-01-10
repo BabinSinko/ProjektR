@@ -37,7 +37,7 @@ public class NetworkUtil {
             for(int layerRow = 0; layerRow < currentLayerRowLen; layerRow++){ 
                 
                 for(int layerCol = 0; layerCol < currentLayerColLen + 1; layerCol++){ //+1 je zbog biasa koji se formalno gleda kao 0ti weight ciji je ulaz uvijek 1
-                    
+                    /* 
                     if(((currentLayerColLen * layerRow + layerCol) % sequenceLen) % 2 == 0){
                         if(layerCol != currentLayerColLen)
                             childLayerWeights[layerRow][layerCol] = parents[0].getLayers()[layerCount].getWeights()[layerRow][layerCol];
@@ -49,6 +49,15 @@ public class NetworkUtil {
                         else
                             childLayerBiases[layerRow][1] = parents[1].getLayers()[layerCount].getBiases()[layerRow][layerCol];
                     }
+                    */
+
+                    int i = ((currentLayerColLen * layerRow + layerCol) % sequenceLen) % 2;
+
+                    if(layerCol != currentLayerColLen)
+                        childLayerWeights[layerRow][layerCol] = parents[i].getLayers()[layerCount].getWeights()[layerRow][layerCol];
+                    else
+                        childLayerBiases[layerRow][1] = parents[i].getLayers()[layerCount].getBiases()[layerRow][layerCol];
+                
                 }
             }
 
