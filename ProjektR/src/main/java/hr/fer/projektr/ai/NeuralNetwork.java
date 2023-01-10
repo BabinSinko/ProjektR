@@ -61,7 +61,7 @@ public class NeuralNetwork {
         SimpleMatrix prevLayerOutput = input;
         SimpleMatrix currLayerOutput;
 
-        // compute forward prop
+        // compute all layer outputs
         for(Layer l : layers) {
             ActivationFunctionApplier activationFunction = l.getActivationFunction();
             currLayerOutput = activationFunction.apply(l.getWeights().mult(prevLayerOutput).plus(l.getBiases()));
@@ -81,14 +81,10 @@ public class NeuralNetwork {
         return ind;
     }
 
-
     @Override
     public String toString() {
-        System.out.println("Neural Network");
-        for (int i = 0; i < layers.length; i++) {
-            System.out.println("Layer #" + i+1);
-            System.out.println(layers[i].toString());
-            System.out.println();
-        }
+        return "NeuralNetwork{" +
+                "layers=" + Arrays.toString(layers) +
+                '}';
     }
 }
