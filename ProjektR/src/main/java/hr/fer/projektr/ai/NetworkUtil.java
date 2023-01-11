@@ -20,7 +20,7 @@ public class NetworkUtil {
         var randomIntervalValueFirst = random.nextDouble();
         var randomIntervalValueSecond = random.nextDouble();
 
-        double sum = 0.0;
+        var sum = 0.0;
         for(int i = 0; i < fitness.length; i++) {
             sum += parentPickProbabilities[i];
 
