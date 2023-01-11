@@ -23,6 +23,14 @@ public class TestiramAIBozePomozi {
         neuralNetwork.initializeNetwork();
         //System.out.println(neuralNetwork);
 
+        // vraca broj izmedu 0 i 2
+        double[][] input = {
+                {1},
+                {2},
+                {3}
+        };
+        //System.out.println(neuralNetwork.computeForwardProp(new SimpleMatrix(input)));
+
         NeuralNetwork[] testPopulation = new NeuralNetwork[10];
         for (int i = 0; i < testPopulation.length; i++) {
             NeuralNetwork n = new NeuralNetwork(
