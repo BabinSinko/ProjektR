@@ -8,6 +8,30 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class NetworkUtil {
+
+    /**
+     * From the population of NeuralNetworks finds and returns the index of the one with the highest fitness
+     * @param population NeuralNetwork[]
+     * @param fitness double[]
+     * @return int index of network with the best fitness
+     */
+    public static int findBestPlayer(NeuralNetwork[] population, double[] fitness) {
+        if (population.length != fitness.length)
+            throw new IllegalArgumentException("Population and fitness must have same length");
+
+        int ind = 0;
+        double highestScore = fitness[0];
+
+        for (int i = 0; i < fitness.length; i++) {
+            if (fitness[i] > highestScore) {
+                ind = i;
+                highestScore = fitness[i];
+            }
+        }
+
+        return ind;
+    }
+
     public static NeuralNetwork[] pickParents(NeuralNetwork[] population, double[] fitness) {
         var parents = new NeuralNetwork[2];
 
