@@ -3,6 +3,7 @@ package hr.fer.projektr.ai;
 import org.ejml.simple.SimpleMatrix;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Class representing a neural network
@@ -86,5 +87,20 @@ public class NeuralNetwork {
         return "NeuralNetwork{" +
                 "layers=" + Arrays.toString(layers) +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NeuralNetwork that = (NeuralNetwork) o;
+        return inputSize == that.inputSize && Arrays.equals(layers, that.layers);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(inputSize);
+        result = 31 * result + Arrays.hashCode(layers);
+        return result;
     }
 }

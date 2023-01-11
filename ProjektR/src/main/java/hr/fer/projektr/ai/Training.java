@@ -1,6 +1,6 @@
 package hr.fer.projektr.ai;
 
-//todo
+/*
 
 public class Training {
     private int populationSize;
@@ -24,7 +24,7 @@ public class Training {
             population[i] = network;
         }
 
-        double[] fitness = game.play(population); //game will return how well each unit did
+        double[] fitness = game.play(population);
 
         int currIteration = 0;
         double currBestFitness = fitness[NetworkUtil.findBestPlayer(population, fitness)];
@@ -50,3 +50,5 @@ public class Training {
         }
     }
 }
+
+*/

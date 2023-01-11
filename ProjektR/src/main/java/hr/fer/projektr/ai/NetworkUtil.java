@@ -127,6 +127,7 @@ public class NetworkUtil {
 
     /**
      * Mutates the neural network by changing some elements of layers' weights and biases
+     * Mutation is done by summing the current element value and a random number from normal distribution
      *
      * @param neuralNetwork  NeuralNetwork to be mutated
      * @param mutationChance double chance each weight and bias has to be mutated, it is advisable

@@ -2,6 +2,7 @@ package hr.fer.projektr.ai;
 
 import org.ejml.simple.SimpleMatrix;
 
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -105,7 +106,7 @@ public class Layer {
         double min = - max;
 
         for (int i = 0; i < matrix.numRows(); i++) {
-            for (int j = 0; j < matrix.numCols(); i++) {
+            for (int j = 0; j < matrix.numCols(); j++) {
                 matrix.set(i, j, rand.nextDouble(max - min + 1) + min);
             }
         }
@@ -117,5 +118,22 @@ public class Layer {
                 "weights=" + weights +
                 ", biases=" + biases +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Layer layer = (Layer) o;
+        return layerSize == layer.layerSize &&
+                isInitialized == layer.isInitialized &&
+                Objects.equals(activationFunction, layer.activationFunction) &&
+                weights.isIdentical(layer.getWeights(), 0) &&
+                weights.isIdentical(layer.getBiases(), 0);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(layerSize, activationFunction, weights, biases, isInitialized);
     }
 }
