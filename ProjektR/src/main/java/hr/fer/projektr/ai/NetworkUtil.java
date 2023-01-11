@@ -84,14 +84,14 @@ public class NetworkUtil {
                     int i = ((currentLayerColLen * layerRow + layerCol) % sequenceLen) % 2;
 
                     if(layerCol != currentLayerColLen)
-                        childLayerWeights[layerRow][layerCol] = parents[i].getLayers()[layerCount].getWeights()[layerRow][layerCol];
+                        childLayerWeights[layerRow][layerCol] = parents[i].getLayers()[layerCount].getWeights().get(layerRow, layerCol);
                     else
-                        childLayerBiases[layerRow][1] = parents[i].getLayers()[layerCount].getBiases()[layerRow][layerCol];
+                        childLayerBiases[layerRow][1] = parents[i].getLayers()[layerCount].getBiases().get(layerRow, layerCol);
 
                 }
             }
 
-            childLayers[layerCount] = new Layer(layerSize, childLayerWeights, childLayerBiases, ActivationFunctionApplier);
+            childLayers[layerCount] = new Layer(layerSize, childLayerWeights, childLayerBiases, parents[0].getLayers()[layerCount].getActivationFunction());
         }
 
         NeuralNetwork child = new NeuralNetwork(inputSize, childLayers);

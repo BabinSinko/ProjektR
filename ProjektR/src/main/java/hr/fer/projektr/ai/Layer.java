@@ -39,6 +39,16 @@ public class Layer {
         this.isInitialized = true;
     }
 
+    public Layer(int layerSize, double[][] weights, double[][] biases, ActivationFunctionApplier activationFunction){
+        if (layerSize < 1) throw new IllegalArgumentException("layerSize can't be less than 1");
+
+        this.layerSize = layerSize;
+        this.weights = new SimpleMatrix(weights);
+        this.biases = new SimpleMatrix(biases);
+        this.activationFunction = activationFunction;
+        this.isInitialized = true;
+    }
+
     /**
      * Returns the number of neurons in the layer
      * @return int number of neurons
