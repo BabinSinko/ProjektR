@@ -15,6 +15,7 @@ public class Physics {
     public static void playerUpdate(GameState gameState){
         //ako ne nije u zraku i nema brzinu nema smisla izvrsavati fju
         if (gameState.getPlayer().getVerticalSpeed() == 0. && gameState.getPlayer().getBottomY() == GameState.INITIAL_PLAYER_POSITION_Y){
+        	gameState.getPlayer().setJumping(false);
             return;
         }
 
