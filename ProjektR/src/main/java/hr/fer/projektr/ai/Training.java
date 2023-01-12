@@ -1,6 +1,6 @@
 package hr.fer.projektr.ai;
 
-/*
+
 
 public class Training {
     private int populationSize;
@@ -15,7 +15,7 @@ public class Training {
     public void train(int numOfIterations, double desiredFitness) {
         for (int i = 0; i < populationSize; i++) {
             NeuralNetwork network = new NeuralNetwork(
-                    3,
+                    7,
                     new Layer(5, ActivationFunctionAppliers.Sigmoid),
                     new Layer(3, ActivationFunctionAppliers.Net)
             );
@@ -24,7 +24,7 @@ public class Training {
             population[i] = network;
         }
 
-        double[] fitness = game.play(population);
+        double[] fitness = game.simulate(population);
 
         int currIteration = 0;
         double currBestFitness = fitness[NetworkUtil.findBestPlayer(population, fitness)];
@@ -43,12 +43,18 @@ public class Training {
             }
 
             population = nextGeneration;
-            fitness = game.play(population);
+            fitness = game.simulate(population);
 
             currIteration++;
             currBestFitness = fitness[bestFitnessInd];
         }
+
+        System.out.println("Treniranje završilo:");
+        System.out.println("iteracija = " + currIteration);
+        System.out.println("high score = " + currBestFitness);
+
+        game.play(population[NetworkUtil.findBestPlayer(population, fitness)]);
     }
 }
 
-*/
+
