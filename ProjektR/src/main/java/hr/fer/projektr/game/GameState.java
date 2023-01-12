@@ -192,24 +192,23 @@ public class GameState {
         }
 
         generator.updateList();
-        int scoreBefore = this.getScore();
         distanceRan += gameSpeed * STEP_DURATION;
-        if (this.getScore() > scoreBefore && this.getScore() % SPEED_INCREASE_SCORE_THRESHOLD == 0){
+        if (this.getScore() > 100 + SPEED_INCREASE_SCORE_THRESHOLD / SPEED_INCREASE_AMOUNT * (gameSpeed - INITIAL_GAME_SPEED)){
             gameSpeed += SPEED_INCREASE_AMOUNT;
         }
 
         for (Enemy enemy: this.toBeRemoved){
             this.enemies.remove(enemy);
         }
-        //System.out.println(player.toString());
+        //System.out.println(gameSpeed);
     }
 
-    public void start(){
+    public void start(long seed){
         this.player = new Player();
         this.enemies = new ArrayList<>();
         this.toBeRemoved = new HashSet<>();
         this.gameSpeed = INITIAL_GAME_SPEED;
-        this.generator = new Generator(this);
+        this.generator = new Generator(this, seed);
         this.distanceRan = 0.;
         this.isRunning = true;
         this.coinsCollected = 0;

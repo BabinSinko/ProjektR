@@ -26,9 +26,9 @@ public class Generator {
      * konstruktor
      * @param gameState ...
      */
-    public Generator(GameState gameState){
+    public Generator(GameState gameState, long seed){
         this.gameState = gameState;
-        rand = new Random();
+        rand = new Random(seed);
         generateTicks();
     }
 

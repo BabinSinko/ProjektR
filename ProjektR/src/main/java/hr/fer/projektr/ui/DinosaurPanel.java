@@ -27,7 +27,7 @@ public class DinosaurPanel extends JPanel implements ActionListener {
 	}
 	
 	public void gameStart() {
-		game.start();
+		game.start(3);
         timer.start();
 	}
 	

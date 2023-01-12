@@ -31,8 +31,8 @@ public class GameInterface {
         return gameState.getEnemies();
     }
 
-    public void start(){
-        gameState.start();
+    public void start(long seed){
+        gameState.start(seed);
     }
     public boolean isOver(){
         return gameState.isOver();
