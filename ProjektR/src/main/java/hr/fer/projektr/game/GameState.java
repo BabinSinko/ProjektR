@@ -200,15 +200,15 @@ public class GameState {
         for (Enemy enemy: this.toBeRemoved){
             this.enemies.remove(enemy);
         }
-        System.out.println(gameSpeed);
+        //System.out.println(gameSpeed);
     }
 
-    public void start(){
+    public void start(long seed){
         this.player = new Player();
         this.enemies = new ArrayList<>();
         this.toBeRemoved = new HashSet<>();
         this.gameSpeed = INITIAL_GAME_SPEED;
-        this.generator = new Generator(this);
+        this.generator = new Generator(this, seed);
         this.distanceRan = 0.;
         this.isRunning = true;
         this.coinsCollected = 0;

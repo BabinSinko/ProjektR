@@ -13,7 +13,7 @@ public class GeneratorDemo {
     public static void main(String[] args){
 
         GameState state=new GameState(1./60);
-        Generator generator=new Generator(state);
+        Generator generator=new Generator(state, 1);
 
         for (int k=0; k<500; k++){
 
