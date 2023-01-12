@@ -97,7 +97,7 @@ public class NetworkUtil {
                     if(layerCol != currentLayerColLen)
                         childLayerWeights[layerRow][layerCol] = parents[i].getLayers()[layerCount].getWeights().get(layerRow, layerCol);
                     else
-                        childLayerBiases[layerRow][1] = parents[i].getLayers()[layerCount].getBiases().get(layerRow, 0);
+                        childLayerBiases[layerRow][0] = parents[i].getLayers()[layerCount].getBiases().get(layerRow, 0);
                     
                 }
             }

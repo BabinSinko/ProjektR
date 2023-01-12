@@ -48,18 +48,17 @@ public class TestiramAIBozePomozi {
 
         NeuralNetwork[] parents = NetworkUtil.pickParents(testPopulation, testFitness);
         //ocekuje se ispis 2 razlicita roditelja
-        //System.out.println("Parent numero uno: " + parents[0]);
-        //System.out.println();
-        //System.out.println("Parent numero dou: " + parents[1]);
+        System.out.println("Parent numero uno: " + parents[0]);
+        System.out.println();
+        System.out.println("Parent numero dou: " + parents[1]);
 
         //ovo trenutno puca al trebalo bi vratit iskrizano dijete i false, false
-        //NeuralNetwork child = NetworkUtil.crossParents(parents);
-        //System.out.println(child);
-        //System.out.println(child.equals(parents[0]));
-        //System.out.println(child.equals(parents[1]));
+        NeuralNetwork child = NetworkUtil.crossParents(parents);
+        System.out.println(child);
+        System.out.println(child.equals(parents[0]));
+        System.out.println(child.equals(parents[1]));
 
         // pravit cemo se da je ovo dijete, ovo vraca 2 razlicite mreze jer je sansa mutacije 100 posto
-        NeuralNetwork child = parents[0];
         //System.out.println("Dijete prije: " + child);
         //System.out.println();
         NetworkUtil.mutate(child, 1);
