@@ -35,7 +35,7 @@ public class Training {
 
             nextGeneration[0] = population[bestFitnessInd]; //elitism
 
-            for (int i = 1; i < 0; i++) {
+            for (int i = 1; i < populationSize; i++) {
                 NeuralNetwork[] parents = NetworkUtil.pickParents(population, fitness);
                 NeuralNetwork child = NetworkUtil.crossParents(parents);
                 NetworkUtil.mutate(child, 0.05);
