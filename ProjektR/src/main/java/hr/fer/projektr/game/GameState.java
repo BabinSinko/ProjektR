@@ -192,16 +192,15 @@ public class GameState {
         }
 
         generator.updateList();
-        int scoreBefore = this.getScore();
         distanceRan += gameSpeed * STEP_DURATION;
-        if (this.getScore() > scoreBefore && this.getScore() % SPEED_INCREASE_SCORE_THRESHOLD == 0){
+        if (this.getScore() > 100 + SPEED_INCREASE_SCORE_THRESHOLD / SPEED_INCREASE_AMOUNT * (gameSpeed - INITIAL_GAME_SPEED)){
             gameSpeed += SPEED_INCREASE_AMOUNT;
         }
 
         for (Enemy enemy: this.toBeRemoved){
             this.enemies.remove(enemy);
         }
-        //System.out.println(player.toString());
+        System.out.println(gameSpeed);
     }
 
     public void start(){
