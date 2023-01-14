@@ -1,11 +1,12 @@
 package hr.fer.projektr.ai;
 
 
+import hr.fer.projektr.game.GameSimulator;
 
 public class Training {
+
     private int populationSize;
     private NeuralNetwork[] population;
-
 
     public Training(int populationSize) {
         this.populationSize = populationSize;
@@ -24,7 +25,7 @@ public class Training {
             population[i] = network;
         }
 
-        double[] fitness = game.simulate(population);
+        double[] fitness = GameSimulator.simulate(population);
 
         int currIteration = 0;
         double currBestFitness = fitness[NetworkUtil.findBestPlayer(population, fitness)];
@@ -43,7 +44,7 @@ public class Training {
             }
 
             population = nextGeneration;
-            fitness = game.simulate(population);
+            fitness = GameSimulator.simulate(population);
 
             currIteration++;
             currBestFitness = fitness[bestFitnessInd];
@@ -53,7 +54,7 @@ public class Training {
         System.out.println("iteracija = " + currIteration);
         System.out.println("high score = " + currBestFitness);
 
-        game.play(population[NetworkUtil.findBestPlayer(population, fitness)]);
+        GameSimulator.play(population[NetworkUtil.findBestPlayer(population, fitness)]);
     }
 }
 

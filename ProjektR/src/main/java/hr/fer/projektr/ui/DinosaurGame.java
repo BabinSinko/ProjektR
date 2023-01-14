@@ -1,15 +1,11 @@
 package hr.fer.projektr.ui;
 
 
+import hr.fer.projektr.game.GameInterface;
+
+import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
-
-import hr.fer.projektr.game.GameInterface;
 
 public class DinosaurGame extends JFrame {	
 	/**
@@ -29,6 +25,14 @@ public class DinosaurGame extends JFrame {
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		initGui();
 	}
+
+	public DinosaurGame(GameInterface gameInterface) {
+		setLocation(0, 0);
+		setSize(WIDTH, HEIGHT);
+		setTitle("Dinosaur");
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		initGui(gameInterface);
+	}
 	
 	private void initGui() {
 		GameInterface game = new GameInterface();
@@ -37,6 +41,11 @@ public class DinosaurGame extends JFrame {
 		add(panel);
 		
 		addKeyListener(new InputListener(game, panel));
+	}
+
+	private void initGui(GameInterface gameInterface) {
+		DinosaurPanel panel = new DinosaurPanel(gameInterface);
+		add(panel);
 	}
 	
 
