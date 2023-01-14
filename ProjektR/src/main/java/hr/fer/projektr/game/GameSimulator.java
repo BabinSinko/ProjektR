@@ -31,7 +31,8 @@ public class GameSimulator {
         game.start(seed);
 
         while(!game.isOver()) {
-            gameStep(unit, game);
+            gameInput(unit, game);
+            game.step();
         }
 
         return game.getScore();
@@ -43,11 +44,11 @@ public class GameSimulator {
         gameRender.setVisible(true);
 
         while(!game.isOver()) {
-            gameStep(unit, game);
+            gameInput(unit, game);
         }
     }
 
-    private static void gameStep(NeuralNetwork unit, GameInterface game) {
+    private static void gameInput(NeuralNetwork unit, GameInterface game) {
         var input = getInputMatrix(game);
         var decision = unit.computeForwardProp(input);
         switch(decision) {
