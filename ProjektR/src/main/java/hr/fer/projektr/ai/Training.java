@@ -3,6 +3,8 @@ package hr.fer.projektr.ai;
 
 import hr.fer.projektr.game.GameSimulator;
 
+import java.util.Random;
+
 public class Training {
 
     private int populationSize;
@@ -13,7 +15,10 @@ public class Training {
         this.population = new NeuralNetwork[populationSize];
     }
 
-    public void train(int numOfIterations, double desiredFitness) {
+    public void train(int numOfIterations, double desiredFitness, int changeSeedInterval) {
+        var random = new Random();
+        var seed = random.nextLong();
+
         for (int i = 0; i < populationSize; i++) {
             NeuralNetwork network = new NeuralNetwork(
                     9,
@@ -25,12 +30,12 @@ public class Training {
             population[i] = network;
         }
 
-        double[] fitness = GameSimulator.simulate(population);
+        double[] fitness = GameSimulator.simulate(population, seed);
 
         int currIteration = 0;
         double currBestFitness = fitness[NetworkUtil.findBestPlayer(population, fitness)];
 
-        while(currIteration < numOfIterations || currBestFitness < desiredFitness) {
+        while(currIteration < numOfIterations && currBestFitness < desiredFitness) {
             NeuralNetwork[] nextGeneration = new NeuralNetwork[populationSize];
             int bestFitnessInd = NetworkUtil.findBestPlayer(population, fitness);
 
@@ -44,17 +49,28 @@ public class Training {
             }
 
             population = nextGeneration;
-            fitness = GameSimulator.simulate(population);
+            fitness = GameSimulator.simulate(population, seed);
 
             currIteration++;
+            bestFitnessInd = NetworkUtil.findBestPlayer(population, fitness);
             currBestFitness = fitness[bestFitnessInd];
+
+            if(currIteration % changeSeedInterval == 0) {
+                seed = random.nextLong();
+            }
+
+            if(currIteration % 50 == 0) {
+                System.out.println("Treniranje u tijeku:");
+                System.out.println("iteracija = " + currIteration);
+                System.out.println("high score = " + currBestFitness);
+            }
         }
 
         System.out.println("Treniranje završilo:");
         System.out.println("iteracija = " + currIteration);
         System.out.println("high score = " + currBestFitness);
 
-        GameSimulator.play(population[NetworkUtil.findBestPlayer(population, fitness)]);
+        GameSimulator.play(population[NetworkUtil.findBestPlayer(population, fitness)], seed);
     }
 }
 

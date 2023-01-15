@@ -2,8 +2,6 @@ package hr.fer.projektr.ai;
 
 import org.ejml.simple.SimpleMatrix;
 
-import java.time.Instant;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -77,7 +75,7 @@ public class NetworkUtil {
         int inputSize = parents[0].getInputSize();
         Layer[] childLayers = new Layer[parents[0].getLayers().length];
 
-        int sequenceLen = 5; //should be manually adjusted and a divisor of the total number of elements in the weights+biases matrix
+        int sequenceLen = 29; //should be manually adjusted and a divisor of the total number of elements in the weights+biases matrix
         int wbCount = 0;
 
         for(int layerCount = 0; layerCount < parents[0].getLayers().length; layerCount++) {

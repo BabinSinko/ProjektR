@@ -39,9 +39,14 @@ public class GameSimulator {
     }
 
     public static void play(NeuralNetwork unit) {
+        play(unit, DEFAULT_SEED);
+    }
+
+    public static void play(NeuralNetwork unit, long seed) {
         var game = new GameInterface();
         var gameRender = new DinosaurGame(game);
         gameRender.setVisible(true);
+        game.start(seed);
 
         while(!game.isOver()) {
             gameInput(unit, game);
