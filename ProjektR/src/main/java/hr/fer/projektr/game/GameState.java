@@ -60,7 +60,7 @@ public class GameState {
     public static final double MIN_COIN_Y = 1;
     public static final double MAX_COIN_Y = 1-0.5*GameState.INITIAL_JUMP_SPEED*GameState.INITIAL_JUMP_SPEED/GameState.GRAVITY;
     public static final double CENTER_COIN_Y = 1 - PLAYER_DUCKING_HEIGHT - 0.02;
-    public static final double COIN_SCORE_VALUE = 25;
+    public static final double COIN_SCORE_VALUE = 200;
 
     //Constants relating to the game world
     public static final double GRAVITY = 1.3;
