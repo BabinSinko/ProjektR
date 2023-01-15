@@ -149,4 +149,18 @@ public class NetworkUtil {
         }
     }
 
+    /**
+     * Checks if population already contains a NeuralNetwork of same values as target NeuralNetwork
+     * @param population NeuralNetwork[]
+     * @param target NeuralNetwork
+     * @return boolean
+     */
+    public static boolean populationContainsNetwork(NeuralNetwork[] population, NeuralNetwork target) {
+        for (NeuralNetwork neuralNetwork : population) {
+            if (neuralNetwork == null) break;
+            if (neuralNetwork.equals(target)) return true;
+        }
+        return false;
+    }
+
 }

@@ -45,11 +45,15 @@ public class Training {
 
             nextGeneration[0] = population[bestFitnessInd]; //elitism
 
-            for (int i = 1; i < populationSize; i++) {
+            int index = 1;
+            while (index < nextGeneration.length) {
                 NeuralNetwork[] parents = NetworkUtil.pickParents(population, fitness);
                 NeuralNetwork child = NetworkUtil.crossParents(parents);
                 NetworkUtil.mutate(child, 0.05);
-                nextGeneration[i] = child;    // but only if such child doesn't already exist in next gen
+
+                if(NetworkUtil.populationContainsNetwork(nextGeneration, child)) continue;
+
+                nextGeneration[index++] = child;
             }
 
             population = nextGeneration;
