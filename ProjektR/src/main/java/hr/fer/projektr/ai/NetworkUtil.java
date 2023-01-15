@@ -75,7 +75,7 @@ public class NetworkUtil {
         int inputSize = parents[0].getInputSize();
         Layer[] childLayers = new Layer[parents[0].getLayers().length];
 
-        int sequenceLen = 8; //should be manually adjusted and a divisor of the total number of elements in the weights+biases matrix
+        int sequenceLen = 50; //should be manually adjusted and a divisor of the total number of elements in the weights+biases matrix
         int wbCount = 0;
 
         for(int layerCount = 0; layerCount < parents[0].getLayers().length; layerCount++) {

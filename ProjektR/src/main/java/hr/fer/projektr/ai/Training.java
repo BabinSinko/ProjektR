@@ -64,12 +64,11 @@ public class Training {
             currBestFitness = fitness[bestFitnessInd];
 
             if(currIteration % 50 == 0) {
-                System.out.println("Treniranje u tijeku:");
-                System.out.println("iteracija = " + currIteration);
-                System.out.println("high score = " + currBestFitness);
+                System.out.println("Treniranje u tijeku: iteracija = " + currIteration + ", high score = " + currBestFitness);
             }
         }
 
+        System.out.println();
         System.out.println("Treniranje završilo:");
         System.out.println("iteracija = " + currIteration);
         System.out.println("high score = " + currBestFitness);
