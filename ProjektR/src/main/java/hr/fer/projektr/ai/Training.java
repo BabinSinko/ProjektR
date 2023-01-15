@@ -36,6 +36,10 @@ public class Training {
         double currBestFitness = fitness[NetworkUtil.findBestPlayer(population, fitness)];
 
         while(currIteration < numOfIterations && currBestFitness < desiredFitness) {
+            if(currIteration % changeSeedInterval == 0) {
+                seed = random.nextLong();
+            }
+
             NeuralNetwork[] nextGeneration = new NeuralNetwork[populationSize];
             int bestFitnessInd = NetworkUtil.findBestPlayer(population, fitness);
 
@@ -55,10 +59,6 @@ public class Training {
             bestFitnessInd = NetworkUtil.findBestPlayer(population, fitness);
             currBestFitness = fitness[bestFitnessInd];
 
-            if(currIteration % changeSeedInterval == 0) {
-                seed = random.nextLong();
-            }
-
             if(currIteration % 50 == 0) {
                 System.out.println("Treniranje u tijeku:");
                 System.out.println("iteracija = " + currIteration);
@@ -70,7 +70,11 @@ public class Training {
         System.out.println("iteracija = " + currIteration);
         System.out.println("high score = " + currBestFitness);
 
-        GameSimulator.play(population[NetworkUtil.findBestPlayer(population, fitness)], seed);
+
+        var bestPlayer = population[NetworkUtil.findBestPlayer(population, fitness)];
+        //todo OVDJE: Dodati da fja zapisuje bytecod objekta u neki text file ili nesto
+
+        GameSimulator.play(bestPlayer, seed);
     }
 }
 
