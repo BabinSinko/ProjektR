@@ -5,6 +5,6 @@ import hr.fer.projektr.ai.Training;
 public class Main {
     public static void main(String[] args) {
         //todo dodati da ako mu predamo bytecode da pogrece simulaciju, inace trenira
-        new Training(50).train(1_000, 1_000, 50);
+        new Training(60).train(10_000, 100_000, 10);
     }
 }

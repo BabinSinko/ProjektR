@@ -2,7 +2,6 @@ package hr.fer.projektr.ai;
 
 import org.ejml.simple.SimpleMatrix;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class NetworkUtil {
@@ -33,11 +32,17 @@ public class NetworkUtil {
     public static NeuralNetwork[] pickParents(NeuralNetwork[] population, double[] fitness) {
         var parents = new NeuralNetwork[2];
 
-        var fitnessSum = Arrays.stream(fitness).sum();
-        var parentPickProbabilities = Arrays.stream(fitness).map(unitFitness -> unitFitness / fitnessSum).toArray();
+        var fitnessSum = 0;
+        for(double v: fitness) {
+            fitnessSum += v;
+        }
+
+        var parentPickProbabilities = new double[fitness.length];
+        for(int i = 0; i < fitness.length; i++) {
+            parentPickProbabilities[i] = fitness[i] / fitnessSum;
+        }
 
         var random = new Random();
-
         //value from 0.1
         var randomIntervalValueFirst = random.nextDouble();
         var randomIntervalValueSecond = random.nextDouble();
@@ -57,9 +62,6 @@ public class NetworkUtil {
                 }
                 break;
             }
-
-            if(firstFound) parents[0] = population[i];
-            else if(secondFound) parents[1] = population[i];
         }
 
         return parents;

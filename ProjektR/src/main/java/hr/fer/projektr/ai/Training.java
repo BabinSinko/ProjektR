@@ -51,7 +51,7 @@ public class Training {
                 NeuralNetwork child = NetworkUtil.crossParents(parents);
                 NetworkUtil.mutate(child, 0.05);
 
-                if(NetworkUtil.populationContainsNetwork(nextGeneration, child)) continue;
+                //if(NetworkUtil.populationContainsNetwork(nextGeneration, child)) continue;
 
                 nextGeneration[index++] = child;
             }
@@ -63,7 +63,7 @@ public class Training {
             bestFitnessInd = NetworkUtil.findBestPlayer(population, fitness);
             currBestFitness = fitness[bestFitnessInd];
 
-            if(currIteration % 50 == 0) {
+            if(currIteration % 10 == 0) {
                 System.out.println("Treniranje u tijeku: iteracija = " + currIteration + ", high score = " + currBestFitness);
             }
         }
