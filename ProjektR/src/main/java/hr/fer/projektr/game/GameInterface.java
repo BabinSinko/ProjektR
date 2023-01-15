@@ -41,4 +41,12 @@ public class GameInterface {
     public int getScore(){
         return gameState.getScore();
     }
+
+    public double getGameSpeed() {
+        return gameState.getSpeed();
+    }
+
+    public GameState getGameState() {
+        return gameState;
+    }
 }

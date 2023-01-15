@@ -15,7 +15,7 @@ public class GameSimulator {
     public static double[] simulate(NeuralNetwork[] population, long seed) {
         var fitness = new double[population.length];
 
-        for(int i = 0; i < population.length ; i++) {
+        for(int i = 0; i < population.length; i++) {
             fitness[i] = simulate(population[i], seed);
         }
 
@@ -60,9 +60,86 @@ public class GameSimulator {
     }
 
     private static SimpleMatrix getInputMatrix(GameInterface game) {
-        // TODO: Ucitaj input - ovo je vjerojatno najteze
-        var sensors = new double[7];
+        var player = game.getPlayer();
+        var enemies = game.getEnemies();
 
-        return new SimpleMatrix(7, 1, false, sensors);
+//      sensors[0] = gameSpeed
+//      sensors[1] = playerBottomY
+//      sensors[2] = playerVerticalSpeed
+//      sensors[3] = udaljenost od prvog enemia
+//      sensors[4] = prvi enemi dno
+//      sensors[5] = prvi enemi visina
+//      sensors[6] = prvi enemi sirina
+//      sensors[7] = udaljenost prvog i drugog enemia
+
+        var sensors = new double[8];
+        sensors[0] = game.getGameSpeed();
+        sensors[1] = player.getBottomY();
+        sensors[2] = player.getVerticalSpeed();
+
+        var enemiesSize = enemies.size();
+        if(enemiesSize == 2) {
+            var first = enemies.get(0);
+            var second = enemies.get(1);
+
+            if(first.getRightX() < player.getLeftX()) {
+                sensors[3] = second.getLeftX() - player.getRightX();
+                sensors[4] = second.getBottomY();
+                sensors[5] = second.getHeight();
+                sensors[6] = second.getWidth();
+                sensors[7] = 1 - second.getRightX();
+            } else if() {
+
+            } else {
+                sensors[3] = first.getLeftX() - player.getRightX();
+                sensors[4] = first.getBottomY();
+                sensors[5] = first.getHeight();
+                sensors[6] = first.getWidth();
+                sensors[7] = second.getLeftX() - first.getRightX();
+            }
+        } else if(enemiesSize == 1) {
+            var enemy = enemies.get(0);
+
+            if(enemy.getLeftX() > player.getRightX()) {
+                sensors[3] = enemy.getLeftX() - player.getRightX();
+                sensors[4] = enemy.getBottomY();
+                sensors[5] = enemy.getHeight();
+                sensors[6] = enemy.getWidth();
+                sensors[7] = 1 - enemy.getRightX();
+            } else {
+                sensors[3] = 1 - player.getRightX();
+                sensors[4] = 0;
+                sensors[5] = 0;
+                sensors[6] = 0;
+                sensors[7] = 0;
+            }
+        } else if(enemiesSize > 2) {
+            var first = enemies.get(0);
+            var second = enemies.get(1);
+            var third = enemies.get(2);
+
+            if(first.getRightX() < player.getLeftX()) {
+                sensors[3] = second.getLeftX() - player.getRightX();
+                sensors[4] = second.getBottomY();
+                sensors[5] = second.getHeight();
+                sensors[6] = second.getWidth();
+                sensors[7] = third.getLeftX() - second.getRightX();
+            } else {
+                sensors[3] = first.getLeftX() - player.getRightX();
+                sensors[4] = first.getBottomY();
+                sensors[5] = first.getHeight();
+                sensors[6] = first.getWidth();
+                sensors[7] = second.getLeftX() - first.getRightX();
+            }
+        } else {
+            sensors[3] = 1 - player.getRightX();
+            sensors[4] = 0;
+            sensors[5] = 0;
+            sensors[6] = 0;
+            sensors[7] = 0;
+        }
+
+
+        return new SimpleMatrix(8 +, 1, false, sensors);
     }
 }
