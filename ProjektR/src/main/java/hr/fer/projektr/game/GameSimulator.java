@@ -71,13 +71,16 @@ public class GameSimulator {
 //      sensors[5] = prvi enemi visina
 //      sensors[6] = prvi enemi sirina
 //      sensors[7] = udaljenost prvog i drugog enemia
+//      sensors[8] = širina igača 
 
-        var sensors = new double[8];
+        var sensors = new double[9];
         sensors[0] = game.getGameSpeed();
         sensors[1] = player.getBottomY();
         sensors[2] = player.getVerticalSpeed();
+        sensors[8] = player.getWidth();
 
         var enemiesSize = enemies.size();
+
         if(enemiesSize == 2) {
             var first = enemies.get(0);
             var second = enemies.get(1);
@@ -88,9 +91,8 @@ public class GameSimulator {
                 sensors[5] = second.getHeight();
                 sensors[6] = second.getWidth();
                 sensors[7] = 1 - second.getRightX();
-            } else if() {
-
-            } else {
+            } 
+             else {
                 sensors[3] = first.getLeftX() - player.getRightX();
                 sensors[4] = first.getBottomY();
                 sensors[5] = first.getHeight();
@@ -100,7 +102,7 @@ public class GameSimulator {
         } else if(enemiesSize == 1) {
             var enemy = enemies.get(0);
 
-            if(enemy.getLeftX() > player.getRightX()) {
+            if(!(enemy.getRightX() < player.getLeftX())) {
                 sensors[3] = enemy.getLeftX() - player.getRightX();
                 sensors[4] = enemy.getBottomY();
                 sensors[5] = enemy.getHeight();
@@ -111,7 +113,7 @@ public class GameSimulator {
                 sensors[4] = 0;
                 sensors[5] = 0;
                 sensors[6] = 0;
-                sensors[7] = 0;
+                sensors[7] = 1 - player.getRightX();;
             }
         } else if(enemiesSize > 2) {
             var first = enemies.get(0);
@@ -136,10 +138,10 @@ public class GameSimulator {
             sensors[4] = 0;
             sensors[5] = 0;
             sensors[6] = 0;
-            sensors[7] = 0;
+            sensors[7] = 1 - player.getRightX();
         }
 
 
-        return new SimpleMatrix(8 +, 1, false, sensors);
+        return new SimpleMatrix(9, 1, false, sensors);
     }
 }

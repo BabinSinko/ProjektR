@@ -16,7 +16,7 @@ public class Training {
     public void train(int numOfIterations, double desiredFitness) {
         for (int i = 0; i < populationSize; i++) {
             NeuralNetwork network = new NeuralNetwork(
-                    7,
+                    9,
                     new Layer(5, ActivationFunctionAppliers.Sigmoid),
                     new Layer(3, ActivationFunctionAppliers.Net)
             );
