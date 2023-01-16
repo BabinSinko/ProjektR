@@ -57,7 +57,7 @@ public class Training {
 
                 nextGeneration[index++] = child;
             }
-            NetworkUtil.mutate(nextGeneration[0], 0.05);
+            //NetworkUtil.mutate(nextGeneration[0], 0.05);
 
             population = nextGeneration;
             fitness = GameSimulator.simulate(population, seed);
