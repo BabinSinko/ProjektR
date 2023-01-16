@@ -16,6 +16,7 @@ public class Training {
     }
 
     public void train(int numOfIterations, double desiredFitness, int changeSeedInterval) {
+        System.out.println("Zapocinjem treniranje...");
         var random = new Random();
         var seed = random.nextLong();
 
@@ -64,7 +65,7 @@ public class Training {
             currBestFitness = fitness[bestFitnessInd];
 
             if(currIteration % 10 == 0) {
-                System.out.println("Treniranje u tijeku: iteracija = " + currIteration + ", high score = " + currBestFitness);
+                System.out.println("Treniranje u tijeku: iteracija = " + currIteration + ", highest fitness = " + currBestFitness);
             }
         }
 
