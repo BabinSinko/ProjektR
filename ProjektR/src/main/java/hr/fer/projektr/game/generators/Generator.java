@@ -45,30 +45,31 @@ public class Generator {
             ticks--;
         }
         else{
-            int noEnemy=rand.nextInt(26);
-            if (noEnemy<6){
+            int noEnemy=rand.nextInt(GameState.SMALL_CACTUS_IN_N + GameState.STANDARD_CACTUS_IN_N + GameState.LARGE_CACTUS_IN_N + GameState.LONG_CACTUS_IN_N + GameState.BIRD_IN_N + GameState.COIN_IN_N);
+            if (noEnemy < GameState.SMALL_CACTUS_IN_N){
                 gameState.addEnemy(new Cactus(CactusType.SMALL));
             }
-            else if (noEnemy<12){
+            else if (noEnemy < GameState.SMALL_CACTUS_IN_N + GameState.STANDARD_CACTUS_IN_N){
                 gameState.addEnemy(new Cactus(CactusType.STANDARD));
             }
-            else if (noEnemy<18){
+            else if (noEnemy < GameState.SMALL_CACTUS_IN_N + GameState.STANDARD_CACTUS_IN_N + GameState.LARGE_CACTUS_IN_N){
                 gameState.addEnemy(new Cactus(CactusType.LARGE));
             }
-            else if (noEnemy<20){
+            else if (noEnemy< GameState.SMALL_CACTUS_IN_N + GameState.STANDARD_CACTUS_IN_N + GameState.LARGE_CACTUS_IN_N + GameState.LONG_CACTUS_IN_N){
                 gameState.addEnemy(new Cactus(CactusType.LONG));
             }
-            else if (noEnemy < 23) {
-                int coinY=rand.nextInt(3);
-                if (coinY==1) gameState.addEnemy(new Coin(GameState.MIN_COIN_Y));
-                else if (coinY==2) gameState.addEnemy(new Coin(GameState.CENTER_COIN_Y));
-                else gameState.addEnemy(new Coin(GameState.MAX_COIN_Y));
-            }
-            else {
+            else if (noEnemy < GameState.SMALL_CACTUS_IN_N + GameState.STANDARD_CACTUS_IN_N + GameState.LARGE_CACTUS_IN_N + GameState.LONG_CACTUS_IN_N + GameState.BIRD_IN_N) {
                 int birdY=rand.nextInt(3);
                 if (birdY==1) gameState.addEnemy(new Bird(GameState.MIN_BIRD_Y));
                 else if (birdY==2) gameState.addEnemy(new Bird(GameState.CENTER_BIRD_Y));
                 else gameState.addEnemy(new Bird(GameState.MAX_BIRD_Y));
+            }
+            else/* if (noEnemy < GameState.SMALL_CACTUS_IN_N + GameState.STANDARD_CACTUS_IN_N + GameState.LARGE_CACTUS_IN_N + GameState.LONG_CACTUS_IN_N + GameState.BIRD_IN_N + GameState.COIN_IN_N)*/{
+                int coinY=rand.nextInt(3);
+                if (coinY==1) gameState.addEnemy(new Coin(GameState.MIN_COIN_Y));
+                else if (coinY==2) gameState.addEnemy(new Coin(GameState.CENTER_COIN_Y));
+                else gameState.addEnemy(new Coin(GameState.MAX_COIN_Y));
+
             }
             generateTicks();
         }

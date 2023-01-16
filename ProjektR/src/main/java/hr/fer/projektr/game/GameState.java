@@ -60,7 +60,7 @@ public class GameState {
     public static final double MIN_COIN_Y = 1;
     public static final double MAX_COIN_Y = 1-0.5*GameState.INITIAL_JUMP_SPEED*GameState.INITIAL_JUMP_SPEED/GameState.GRAVITY;
     public static final double CENTER_COIN_Y = 1 - PLAYER_DUCKING_HEIGHT - 0.02;
-    public static final double COIN_SCORE_VALUE = 200;
+    public static final double COIN_SCORE_VALUE = 100;
 
     //Constants relating to the game world
     public static final double GRAVITY = 1.3;
@@ -70,6 +70,13 @@ public class GameState {
     public static final double SCORE_TO_DISTANCE_RAN_RATIO = 6.;
     public final double STEP_DURATION;
 
+    //Enemy spawn constants
+    public static final int STANDARD_CACTUS_IN_N = 300;
+    public static final int SMALL_CACTUS_IN_N = 250;
+    public static final int LARGE_CACTUS_IN_N = 200;
+    public static final int LONG_CACTUS_IN_N = 50;
+    public static final int BIRD_IN_N = 175;
+    public static final int COIN_IN_N = 25;
 
 
     /*

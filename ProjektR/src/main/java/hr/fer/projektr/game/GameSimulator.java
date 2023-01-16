@@ -14,20 +14,25 @@ public class GameSimulator {
         var fitness = new double[population.length];
 
         for(int i = 0; i < population.length; i++) {
-            var game = new GameInterface();
-            game.start(seed);
-            while(!game.isOver()) {
-                switch(population[i].computeForwardProp(getInputMatrix(game))) {
-                    case 0 -> game.input(false, false);
-                    case 1 -> game.input(false, true);
-                    case 2 -> game.input(true, false);
-                    default -> throw new UnsupportedOperationException("Output value must be 0, 1 or 2");
+            for(int j = 0; j < NUMBER_OF_GAMES; j++) {
+                var game = new GameInterface();
+                game.start(seed + j);
+                while(!game.isOver()) {
+                    switch(population[i].computeForwardProp(getInputMatrix(game))) {
+                        case 0 -> game.input(false, false);
+                        case 1 -> game.input(false, true);
+                        case 2 -> game.input(true, false);
+                        default -> throw new UnsupportedOperationException("Output value must be 0, 1 or 2");
+                    }
+                    game.step();
                 }
-                game.step();
+                fitness[i] += game.getScore();
             }
-            fitness[i] = game.getScore();
         }
 
+        for(int i = 0; i < fitness.length; i++) {
+            fitness[i] /= NUMBER_OF_GAMES;
+        }
         return fitness;
     }
 
