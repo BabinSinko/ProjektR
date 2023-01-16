@@ -9,7 +9,6 @@ public class GameSimulator {
 
     private static final long DEFAULT_SEED = 3;
     private static final int NUMBER_OF_GAMES = 30;
-    private int nes;
 
     public static double[] simulate(NeuralNetwork[] population, long seed) {
         var fitness = new double[population.length];
