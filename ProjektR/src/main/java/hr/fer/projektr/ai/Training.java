@@ -3,6 +3,7 @@ package hr.fer.projektr.ai;
 
 import hr.fer.projektr.game.GameSimulator;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class Training {
@@ -55,6 +56,7 @@ public class Training {
 
                 nextGeneration[index++] = child;
             }
+            NetworkUtil.mutate(nextGeneration[0], 0.05);
 
             population = nextGeneration;
             fitness = GameSimulator.simulate(population, seed);
@@ -63,8 +65,10 @@ public class Training {
             bestFitnessInd = NetworkUtil.findBestPlayer(population, fitness);
             currBestFitness = fitness[bestFitnessInd];
 
-            if(currIteration % 10 == 0) {
-                System.out.println("Treniranje u tijeku: iteracija = " + currIteration + ", high score = " + currBestFitness);
+            if(currIteration%10==0) {
+                System.out.println("Treniranje u tijeku: iteracija = " + currIteration + ", highest fitness = " + currBestFitness);
+                System.out.println("Treniranje u tijeku: iteracija = " + currIteration + ", average fitness = " + Arrays.stream(fitness).average().getAsDouble());
+                System.out.println();
             }
         }
 
