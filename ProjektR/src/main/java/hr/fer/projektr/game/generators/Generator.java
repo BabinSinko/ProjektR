@@ -45,7 +45,7 @@ public class Generator {
             ticks--;
         }
         else{
-            int noEnemy=rand.nextInt(GameState.N);
+            int noEnemy=rand.nextInt(GameState.SMALL_CACTUS_IN_N + GameState.STANDARD_CACTUS_IN_N + GameState.LARGE_CACTUS_IN_N + GameState.LONG_CACTUS_IN_N + GameState.BIRD_IN_N + GameState.COIN_IN_N);
             if (noEnemy < GameState.SMALL_CACTUS_IN_N){
                 gameState.addEnemy(new Cactus(CactusType.SMALL));
             }

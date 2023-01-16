@@ -70,8 +70,7 @@ public class GameState {
     public static final double SCORE_TO_DISTANCE_RAN_RATIO = 6.;
     public final double STEP_DURATION;
 
-    //Enemy spawn constants (please add them up to n, I will not check)
-    public static final int N = 1000;
+    //Enemy spawn constants
     public static final int STANDARD_CACTUS_IN_N = 300;
     public static final int SMALL_CACTUS_IN_N = 250;
     public static final int LARGE_CACTUS_IN_N = 200;
