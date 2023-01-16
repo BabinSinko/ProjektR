@@ -8,6 +8,10 @@ import org.ejml.simple.SimpleMatrix;
 public class GameSimulator {
 
     private static final long DEFAULT_SEED = 3;
+<<<<<<< Updated upstream
+=======
+    private static final int NUMBER_OF_GAMES = 10;
+>>>>>>> Stashed changes
 
     public static double[] simulate(NeuralNetwork[] population, long seed) {
         var fitness = new double[population.length];
