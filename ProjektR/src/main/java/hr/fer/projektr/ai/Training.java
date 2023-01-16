@@ -68,8 +68,6 @@ public class Training {
 
             if(currIteration % 10 == 0) {
                 System.out.println("Treniranje u tijeku: iteracija = " + currIteration + ", highest fitness = " + currBestFitness);
-                System.out.println("Treniranje u tijeku: iteracija = " + currIteration + ", average fitness = " + Arrays.stream(fitness).average().getAsDouble());
-                System.out.println();
             }
         }
 
