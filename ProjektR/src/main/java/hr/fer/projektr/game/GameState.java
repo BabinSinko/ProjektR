@@ -64,9 +64,9 @@ public class GameState {
 
     //Constants relating to the game world
     public static final double GRAVITY = 1.3;
-    public static final double INITIAL_GAME_SPEED = 0.2;
-    public static final int SPEED_INCREASE_SCORE_THRESHOLD = 100;
-    public static final double SPEED_INCREASE_AMOUNT = 0.01;
+    public static final double INITIAL_GAME_SPEED = 0.4;
+    public static final int SPEED_INCREASE_SCORE_THRESHOLD = 50;
+    public static final double SPEED_INCREASE_AMOUNT = 0.02;
     public static final double SCORE_TO_DISTANCE_RAN_RATIO = 6.;
     public final double STEP_DURATION;
 
