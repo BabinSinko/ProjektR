@@ -24,7 +24,7 @@ public class GameState {
     public static final double PLAYER_WIDTH = PLAYER_HEIGHT * 40/86;
     public static final double PLAYER_DUCKING_HEIGHT = PLAYER_HEIGHT * 49/86;
     public static final double PLAYER_DUCKING_WIDTH = PLAYER_WIDTH * 110/40;
-    public static final double INITIAL_JUMP_SPEED = -1.2;
+    public static final double INITIAL_JUMP_SPEED = -2.;
     public static final double PLAYER_LEFT_OFFSET = 0.02;
     public static final double PLAYER_POSITION_X = 0 + PLAYER_WIDTH * 40/80 + PLAYER_LEFT_OFFSET;
     public static final double INITIAL_PLAYER_POSITION_Y = 1;
@@ -64,7 +64,7 @@ public class GameState {
     public static final double COIN_SCORE_VALUE = 100;
 
     //Constants relating to the game world
-    public static final double GRAVITY = 2.5;
+    public static final double GRAVITY = 5;
     public static final double INITIAL_GAME_SPEED = 0.4;
     public static final int SPEED_INCREASE_SCORE_THRESHOLD = 50;
     public static final double SPEED_INCREASE_AMOUNT = 0.02;
