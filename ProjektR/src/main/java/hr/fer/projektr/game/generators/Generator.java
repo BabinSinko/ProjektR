@@ -67,7 +67,10 @@ public class Generator {
             else {
                 int birdY=rand.nextInt(3);
                 if (birdY==1) gameState.addEnemy(new Bird(GameState.MIN_BIRD_Y));
-                else if (birdY==2) gameState.addEnemy(new Bird(GameState.CENTER_BIRD_Y));
+                else if (birdY==2) {
+                    gameState.addEnemy(new Bird(GameState.CENTER_BIRD_Y));
+                    gameState.addEnemy(new Bird(GameState.MAX_BIRD_Y));
+                }
                 else gameState.addEnemy(new Bird(GameState.MAX_BIRD_Y));
             }
             generateTicks();
