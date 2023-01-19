@@ -39,8 +39,8 @@ public class Training {
         int currIteration = 0;
         double currBestFitness = fitness[NetworkUtil.findBestPlayer(population, fitness)];
 
-        while(currIteration < numOfIterations && currBestFitness < desiredFitness) {
-            if(currIteration % changeSeedInterval == 0) {
+        while (currIteration < numOfIterations && currBestFitness < desiredFitness) {
+            if (currIteration % changeSeedInterval == 0) {
                 seed = random.nextLong();
             }
 
@@ -68,8 +68,10 @@ public class Training {
             bestFitnessInd = NetworkUtil.findBestPlayer(population, fitness);
             currBestFitness = fitness[bestFitnessInd];
 
-            if(currIteration % 10 == 0) {
+            if (currIteration % 10 == 0) {
                 System.out.println("Treniranje u tijeku: iteracija = " + currIteration + ", highest fitness = " + currBestFitness);
+            }
+            if (currIteration % 100 == 0) {
                 System.out.println("Saving AI backup just in case...");
                 try {
                     FileOutputStream fos = new FileOutputStream("AI.bak.ser");
@@ -78,7 +80,7 @@ public class Training {
                     oos.writeObject(currBestFitness);
                     fos.close();
                     oos.close();
-                } catch(Exception ignored) {
+                } catch (Exception ignored) {
                     System.out.println("Backup saving failed...");
                 }
             }
@@ -96,7 +98,7 @@ public class Training {
         var scanner = new Scanner(System.in);
         System.out.println();
         System.out.print("Do you wish to save current AI?(y/n): ");
-        if(scanner.nextLine().equals("y")) {
+        if (scanner.nextLine().equals("y")) {
             System.out.println("Saving...");
             try {
                 FileOutputStream fos = new FileOutputStream("AI.ser");
@@ -105,14 +107,14 @@ public class Training {
                 oos.writeObject(fitness[bestPlayerIndex]);
                 fos.close();
                 oos.close();
-            } catch(Exception ignored) {
+            } catch (Exception ignored) {
                 System.out.println("Saving failed...");
             }
         }
 
         System.out.println();
         System.out.print("Do you wish to play current AI?(y/n): ");
-        if(scanner.nextLine().equals("y")) {
+        if (scanner.nextLine().equals("y")) {
             System.out.print("Starting game with a unit of " + fitness[bestPlayerIndex] + " fitness.");
             GameSimulator.play(bestPlayer, seed);
         }
