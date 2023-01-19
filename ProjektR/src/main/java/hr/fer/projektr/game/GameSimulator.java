@@ -66,6 +66,9 @@ public class GameSimulator {
 //      sensors[7] = prvi enemi sirina
 //      sensors[8] = udaljenost prvog i drugog enemia
 
+//      sensors[9] = drui enemi dno
+//      sensors[10] = drugi enemi visina
+//      sensors[11] = drugi enemi sirina
         var sensors = new double[9];
         sensors[0] = game.getGameSpeed();
         sensors[1] = player.getBottomY();
@@ -74,12 +77,14 @@ public class GameSimulator {
 
         var enemiesSize = enemies.size();
         if(enemiesSize == 2) {
-            var enemy = enemies.get(1).getRightX() < player.getLeftX() ? enemies.get(1) : enemies.get(0);
+            //var enemy = enemies.get(1).getRightX() < player.getLeftX() ? enemies.get(1) : enemies.get(0);
+            var enemy = enemies.get(0).getRightX() < player.getLeftX() ? enemies.get(1) : enemies.get(0);
             sensors[4] = enemy.getLeftX() - player.getRightX();
             sensors[5] = enemy.getBottomY();
             sensors[6] = enemy.getHeight();
             sensors[7] = enemy.getWidth();
             sensors[8] = enemy.getEntityType() == EntityType.COIN ? 1: 0;
+
         } else if(enemiesSize == 1) {
             var enemy = enemies.get(0);
             if(!(enemy.getRightX() < player.getLeftX())) {
