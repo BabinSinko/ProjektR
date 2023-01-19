@@ -61,11 +61,11 @@ public class Generator {
                 int birdY=rand.nextInt(4);
                 if (birdY==1) gameState.addEnemy(new Bird(GameState.MIN_BIRD_Y));
                 else if (birdY==2) {
-                    gameState.addEnemy(new Bird(GameState.MAX_CENTER_BIRD_Y));
+                    gameState.addEnemy(new Bird(GameState.CENTER_BIRD_Y));
                 }
                 else if (birdY==3) {
                     gameState.addEnemy(new Bird(0.01, GameState.MAX_CENTER_BIRD_Y));
-                    gameState.addEnemy(new Bird(GameState.MAX_BIRD_Y));
+                    gameState.addEnemy(new Bird(GameState.CENTER_BIRD_Y));
                 }
                 else gameState.addEnemy(new Bird(GameState.MAX_BIRD_Y));
             }
