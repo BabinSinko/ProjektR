@@ -24,7 +24,7 @@ public class Training {
         for (int i = 0; i < populationSize; i++) {
             NeuralNetwork network = new NeuralNetwork(
                     9,
-                    new Layer(5, ActivationFunctionAppliers.Sigmoid),
+                    new Layer(7, ActivationFunctionAppliers.Sigmoid),
                     new Layer(3, ActivationFunctionAppliers.Net)
             );
 
