@@ -14,4 +14,8 @@ public final class Bird extends Enemy{
     public Bird(double positionY){
         super(GameState.INITIAL_BIRD_POSITION_X, positionY, GameState.BIRD_WIDTH, GameState.BIRD_HEIGHT, EntityType.BIRD);
     }
+    
+    public Bird(double offsetX, double positionY) {
+    	super(GameState.INITIAL_BIRD_POSITION_X + offsetX, positionY, GameState.BIRD_WIDTH, GameState.BIRD_HEIGHT, EntityType.BIRD);
+    }
 }
