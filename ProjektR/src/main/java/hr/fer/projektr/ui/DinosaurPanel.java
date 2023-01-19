@@ -10,7 +10,7 @@ import hr.fer.projektr.game.GameInterface;
 import hr.fer.projektr.game.entities.Entity;
 
 public class DinosaurPanel extends JPanel implements ActionListener {
-	private final static int DELAY = 10;
+	private final static int DELAY = 1;
 	
 	private static final long serialVersionUID = 1L;
 	

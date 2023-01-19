@@ -49,13 +49,13 @@ public class Generator {
             if (noEnemy < GameState.SMALL_CACTUS_IN_N){
                 gameState.addEnemy(new Cactus(CactusType.SMALL));
             }
-            else if (noEnemy < GameState.SMALL_CACTUS_IN_N + GameState.STANDARD_CACTUS_IN_N){
+            else if (noEnemy < GameState.SMALL_CACTUS_IN_N + GameState.BIRD_IN_N){
                 gameState.addEnemy(new Cactus(CactusType.STANDARD));
             }
-            else if (noEnemy < GameState.SMALL_CACTUS_IN_N + GameState.STANDARD_CACTUS_IN_N + GameState.LARGE_CACTUS_IN_N){
+            else if (noEnemy < GameState.SMALL_CACTUS_IN_N + GameState.BIRD_IN_N + GameState.LARGE_CACTUS_IN_N){
                 gameState.addEnemy(new Cactus(CactusType.LARGE));
             }
-            else if (noEnemy< GameState.SMALL_CACTUS_IN_N + GameState.STANDARD_CACTUS_IN_N + GameState.LARGE_CACTUS_IN_N + GameState.LONG_CACTUS_IN_N){
+            else if (noEnemy< GameState.SMALL_CACTUS_IN_N + GameState.BIRD_IN_N + GameState.LARGE_CACTUS_IN_N + GameState.LONG_CACTUS_IN_N){
                 gameState.addEnemy(new Cactus(CactusType.LONG));
             }
             else if (noEnemy < GameState.SMALL_CACTUS_IN_N + GameState.STANDARD_CACTUS_IN_N + GameState.LARGE_CACTUS_IN_N + GameState.LONG_CACTUS_IN_N + GameState.BIRD_IN_N) {
