@@ -61,7 +61,10 @@ public class Generator {
             else if (noEnemy < GameState.SMALL_CACTUS_IN_N + GameState.STANDARD_CACTUS_IN_N + GameState.LARGE_CACTUS_IN_N + GameState.LONG_CACTUS_IN_N + GameState.BIRD_IN_N) {
                 int birdY=rand.nextInt(3);
                 if (birdY==1) gameState.addEnemy(new Bird(GameState.MIN_BIRD_Y));
-                else if (birdY==2) gameState.addEnemy(new Bird(GameState.CENTER_BIRD_Y));
+                else if (birdY==2) {
+                    gameState.addEnemy(new Bird(GameState.CENTER_BIRD_Y));
+                    gameState.addEnemy(new Bird(GameState.MAX_BIRD_Y));
+                }
                 else gameState.addEnemy(new Bird(GameState.MAX_BIRD_Y));
             }
             else/* if (noEnemy < GameState.SMALL_CACTUS_IN_N + GameState.STANDARD_CACTUS_IN_N + GameState.LARGE_CACTUS_IN_N + GameState.LONG_CACTUS_IN_N + GameState.BIRD_IN_N + GameState.COIN_IN_N)*/{
