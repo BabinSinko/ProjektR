@@ -3,7 +3,6 @@ package hr.fer.projektr.game.generators;
 import hr.fer.projektr.game.GameState;
 import hr.fer.projektr.game.entities.*;
 
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -63,6 +62,7 @@ public class Generator {
                 if (birdY==1) gameState.addEnemy(new Bird(GameState.MIN_BIRD_Y));
                 else if (birdY==2) {
                     gameState.addEnemy(new Bird(GameState.CENTER_BIRD_Y));
+                    gameState.addEnemy(new Bird(GameState.MAX_CENTER_BIRD_Y));
                     gameState.addEnemy(new Bird(GameState.MAX_BIRD_Y));
                 }
                 else gameState.addEnemy(new Bird(GameState.MAX_BIRD_Y));
