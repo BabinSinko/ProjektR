@@ -70,6 +70,17 @@ public class Training {
 
             if(currIteration % 10 == 0) {
                 System.out.println("Treniranje u tijeku: iteracija = " + currIteration + ", highest fitness = " + currBestFitness);
+                System.out.println("Saving AI backup just in case...");
+                try {
+                    FileOutputStream fos = new FileOutputStream("AI.bak.ser");
+                    ObjectOutputStream oos = new ObjectOutputStream(fos);
+                    oos.writeObject(population[bestFitnessInd]);
+                    oos.writeObject(currBestFitness);
+                    fos.close();
+                    oos.close();
+                } catch(Exception ignored) {
+                    System.out.println("Backup saving failed...");
+                }
             }
         }
 
