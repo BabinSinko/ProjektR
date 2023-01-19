@@ -19,12 +19,12 @@ public class Physics {
             return;
         }
 
-        if (gameState.getPlayer().getBottomY() + gameState.getPlayer().getVerticalSpeed() * gameState.STEP_DURATION * gameState.getSpeed() > GameState.INITIAL_PLAYER_POSITION_Y){
+        if (gameState.getPlayer().getBottomY() + gameState.getPlayer().getVerticalSpeed() * gameState.STEP_DURATION > GameState.INITIAL_PLAYER_POSITION_Y){
             gameState.getPlayer().setBottomPositionY(GameState.INITIAL_PLAYER_POSITION_Y);
             gameState.getPlayer().setVerticalSpeed(0.);
         } else {
-            gameState.getPlayer().setBottomPositionY(gameState.getPlayer().getBottomY() + gameState.getPlayer().getVerticalSpeed() * gameState.STEP_DURATION * gameState.getSpeed());
-            gameState.getPlayer().setVerticalSpeed(gameState.getPlayer().getVerticalSpeed() + GameState.GRAVITY * gameState.STEP_DURATION * gameState.getSpeed());
+            gameState.getPlayer().setBottomPositionY(gameState.getPlayer().getBottomY() + gameState.getPlayer().getVerticalSpeed() * gameState.STEP_DURATION);
+            gameState.getPlayer().setVerticalSpeed(gameState.getPlayer().getVerticalSpeed() + GameState.GRAVITY * gameState.STEP_DURATION);
         }
     }
 
