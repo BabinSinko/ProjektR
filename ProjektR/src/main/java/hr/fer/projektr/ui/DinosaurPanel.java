@@ -83,7 +83,7 @@ public class DinosaurPanel extends JPanel implements ActionListener {
 
 	private int convertWidth(double width) {
 		Insets insets = getInsets();
-		int widthComp = getWidth() - (insets.left + insets.right);
+		int widthComp = getHeight() - (insets.left + insets.right);
 
 		return (int) (width * (widthComp - 1));
 	}

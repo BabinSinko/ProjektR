@@ -24,7 +24,7 @@ public class GameState {
     public static final double PLAYER_WIDTH = PLAYER_HEIGHT * 40/86;
     public static final double PLAYER_DUCKING_HEIGHT = PLAYER_HEIGHT * 49/86;
     public static final double PLAYER_DUCKING_WIDTH = PLAYER_WIDTH * 110/40;
-    public static final double INITIAL_JUMP_SPEED = -1.;
+    public static final double INITIAL_JUMP_SPEED = -2.;
     public static final double PLAYER_LEFT_OFFSET = 0.02;
     public static final double PLAYER_POSITION_X = 0 + PLAYER_WIDTH * 40/80 + PLAYER_LEFT_OFFSET;
     public static final double INITIAL_PLAYER_POSITION_Y = 1;
@@ -52,6 +52,7 @@ public class GameState {
     public static final double MIN_BIRD_Y = 1;
     public static final double MAX_BIRD_Y = 1-0.5*GameState.INITIAL_JUMP_SPEED*GameState.INITIAL_JUMP_SPEED/GameState.GRAVITY;
     public static final double CENTER_BIRD_Y = 1 - PLAYER_DUCKING_HEIGHT - 0.02;
+    public static final double MAX_CENTER_BIRD_Y = (MAX_BIRD_Y+MIN_BIRD_Y)/2;
 
     //Constants relating to the bird enemies
     public static final double COIN_HEIGHT = PLAYER_HEIGHT * 52/86;
@@ -63,7 +64,7 @@ public class GameState {
     public static final double COIN_SCORE_VALUE = 100;
 
     //Constants relating to the game world
-    public static final double GRAVITY = 1.3;
+    public static final double GRAVITY = 5;
     public static final double INITIAL_GAME_SPEED = 0.4;
     public static final int SPEED_INCREASE_SCORE_THRESHOLD = 50;
     public static final double SPEED_INCREASE_AMOUNT = 0.02;

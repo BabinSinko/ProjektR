@@ -3,7 +3,6 @@ package hr.fer.projektr.game.generators;
 import hr.fer.projektr.game.GameState;
 import hr.fer.projektr.game.entities.*;
 
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -49,19 +48,25 @@ public class Generator {
             if (noEnemy < GameState.SMALL_CACTUS_IN_N){
                 gameState.addEnemy(new Cactus(CactusType.SMALL));
             }
-            else if (noEnemy < GameState.SMALL_CACTUS_IN_N + GameState.STANDARD_CACTUS_IN_N){
+            else if (noEnemy < GameState.SMALL_CACTUS_IN_N + GameState.BIRD_IN_N){
                 gameState.addEnemy(new Cactus(CactusType.STANDARD));
             }
-            else if (noEnemy < GameState.SMALL_CACTUS_IN_N + GameState.STANDARD_CACTUS_IN_N + GameState.LARGE_CACTUS_IN_N){
+            else if (noEnemy < GameState.SMALL_CACTUS_IN_N + GameState.BIRD_IN_N + GameState.LARGE_CACTUS_IN_N){
                 gameState.addEnemy(new Cactus(CactusType.LARGE));
             }
-            else if (noEnemy< GameState.SMALL_CACTUS_IN_N + GameState.STANDARD_CACTUS_IN_N + GameState.LARGE_CACTUS_IN_N + GameState.LONG_CACTUS_IN_N){
+            else if (noEnemy< GameState.SMALL_CACTUS_IN_N + GameState.BIRD_IN_N + GameState.LARGE_CACTUS_IN_N + GameState.LONG_CACTUS_IN_N){
                 gameState.addEnemy(new Cactus(CactusType.LONG));
             }
             else if (noEnemy < GameState.SMALL_CACTUS_IN_N + GameState.STANDARD_CACTUS_IN_N + GameState.LARGE_CACTUS_IN_N + GameState.LONG_CACTUS_IN_N + GameState.BIRD_IN_N) {
-                int birdY=rand.nextInt(3);
+                int birdY=rand.nextInt(4);
                 if (birdY==1) gameState.addEnemy(new Bird(GameState.MIN_BIRD_Y));
-                else if (birdY==2) gameState.addEnemy(new Bird(GameState.CENTER_BIRD_Y));
+                else if (birdY==2) {
+                    gameState.addEnemy(new Bird(GameState.CENTER_BIRD_Y));
+                }
+                else if (birdY==3) {
+                    gameState.addEnemy(new Bird(0.01, GameState.MAX_BIRD_Y));
+                    gameState.addEnemy(new Bird(GameState.CENTER_BIRD_Y));
+                }
                 else gameState.addEnemy(new Bird(GameState.MAX_BIRD_Y));
             }
             else/* if (noEnemy < GameState.SMALL_CACTUS_IN_N + GameState.STANDARD_CACTUS_IN_N + GameState.LARGE_CACTUS_IN_N + GameState.LONG_CACTUS_IN_N + GameState.BIRD_IN_N + GameState.COIN_IN_N)*/{
