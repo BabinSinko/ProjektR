@@ -112,6 +112,60 @@ public class NetworkUtil {
         return child;
     }
 
+    public static NeuralNetwork[] crossParentsV2(NeuralNetwork[] parents) {
+
+        //creates the child by crossing the parents' weights and biases
+        //but which method should we use for crossing them? (take each w and b from parents with 50% chance, cut and mix rows...)
+        //todo
+        if(parents.length > 2) throw new IllegalArgumentException();
+
+        int inputSize = parents[0].getInputSize();
+        Layer[] childLayers1 = new Layer[parents[0].getLayers().length];
+        Layer[] childLayers2 = new Layer[parents[0].getLayers().length];
+
+        int sequenceLen = 5; //should be manually adjusted and a divisor of the total number of elements in the weights+biases matrix
+        int wbCount = 0;
+
+        for(int layerCount = 0; layerCount < parents[0].getLayers().length; layerCount++) {
+            int currentLayerRowLen = parents[0].getLayers()[layerCount].getWeights().numRows();
+            int currentLayerColLen = parents[0].getLayers()[layerCount].getWeights().numCols();
+
+            int layerSize = parents[0].getLayers()[layerCount].getLayerSize();
+            double[][] childLayer1Weights = new double[currentLayerRowLen][currentLayerColLen];
+            double[][] childLayer1Biases = new double[currentLayerRowLen][1];
+
+            double[][] childLayer2Weights = new double[currentLayerRowLen][currentLayerColLen];
+            double[][] childLayer2Biases = new double[currentLayerRowLen][1];
+
+            for(int layerRow = 0; layerRow < currentLayerRowLen; layerRow++) {
+
+                for(int layerCol = 0; layerCol < currentLayerColLen + 1; layerCol++) { //+1 je zbog biasa koji se formalno gleda kao 0ti weight ciji je ulaz uvijek 1
+
+                    int i = ((wbCount++) % sequenceLen) % 2;
+
+                    if(layerCol != currentLayerColLen){
+                        childLayer1Weights[layerRow][layerCol] = parents[i].getLayers()[layerCount].getWeights().get(layerRow, layerCol);
+                        childLayer2Weights[layerRow][layerCol] = parents[1 - i].getLayers()[layerCount].getWeights().get(layerRow, layerCol);
+                    }
+                    else {
+                        childLayer1Biases[layerRow][0] = parents[i].getLayers()[layerCount].getBiases().get(layerRow, 0);
+                        childLayer2Biases[layerRow][0] = parents[1 - i].getLayers()[layerCount].getBiases().get(layerRow, 0);
+                    }
+                }
+            }
+
+            childLayers1[layerCount] = new Layer(layerSize, childLayer1Weights, childLayer1Biases, parents[0].getLayers()[layerCount].getActivationFunction());
+            childLayers2[layerCount] = new Layer(layerSize, childLayer2Weights, childLayer2Biases, parents[0].getLayers()[layerCount].getActivationFunction());
+        }
+
+        NeuralNetwork child1 = new NeuralNetwork(inputSize, childLayers1);
+        NeuralNetwork child2 = new NeuralNetwork(inputSize, childLayers2);  
+
+        NeuralNetwork[] children = {child1, child2};
+        
+        return children;
+    }
+
     /**
      * Mutates the neural network by changing some elements of layers' weights and biases
      * Mutation is done by summing the current element value and a random number from normal distribution
