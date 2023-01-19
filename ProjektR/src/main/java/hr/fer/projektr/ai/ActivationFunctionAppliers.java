@@ -1,9 +1,11 @@
 package hr.fer.projektr.ai;
 
+import java.io.Serializable;
+
 /**
  * Class with most common activation function implementations
  */
-public class ActivationFunctionAppliers {
+public class ActivationFunctionAppliers implements Serializable {
 
     /**
      * Linear ActivationFunctionApplier which essentially does nothing to the matrix

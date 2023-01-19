@@ -3,8 +3,10 @@ package hr.fer.projektr.ai;
 
 import hr.fer.projektr.game.GameSimulator;
 
-import java.util.Arrays;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Training {
 
@@ -16,7 +18,7 @@ public class Training {
         this.population = new NeuralNetwork[populationSize];
     }
 
-    public void train(int numOfIterations, double desiredFitness, int changeSeedInterval) {
+    public void train(int numOfIterations, double desiredFitness, int changeSeedInterval, double mutationChance) {
         System.out.println("Zapocinjem treniranje...");
         var random = new Random();
         var seed = random.nextLong();
@@ -51,7 +53,7 @@ public class Training {
             while (index < nextGeneration.length) {
                 NeuralNetwork[] parents = NetworkUtil.pickParents(population, fitness);
                 NeuralNetwork child = NetworkUtil.crossParents(parents);
-                NetworkUtil.mutate(child, 0.05);
+                NetworkUtil.mutate(child, mutationChance);
 
                 //if(NetworkUtil.populationContainsNetwork(nextGeneration, child)) continue;
 
@@ -77,10 +79,32 @@ public class Training {
         System.out.println("high score = " + currBestFitness);
 
 
-        var bestPlayer = population[NetworkUtil.findBestPlayer(population, fitness)];
-        //todo OVDJE: Dodati da fja zapisuje bytecod objekta u neki text file ili nesto
+        var bestPlayerIndex = NetworkUtil.findBestPlayer(population, fitness);
+        var bestPlayer = population[bestPlayerIndex];
 
-        GameSimulator.play(bestPlayer, seed);
+        var scanner = new Scanner(System.in);
+        System.out.println();
+        System.out.print("Do you wish to save current AI?(y/n): ");
+        if(scanner.nextLine().equals("y")) {
+            System.out.println("Saving...");
+            try {
+                FileOutputStream fos = new FileOutputStream("AI.ser");
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(bestPlayer);
+                oos.writeObject(fitness[bestPlayerIndex]);
+                fos.close();
+                oos.close();
+            } catch(Exception ignored) {
+                System.out.println("Saving failed...");
+            }
+        }
+
+        System.out.println();
+        System.out.print("Do you wish to play current AI?(y/n): ");
+        if(scanner.nextLine().equals("y")) {
+            System.out.print("Starting game with a unit of " + fitness[bestPlayerIndex] + " fitness.");
+            GameSimulator.play(bestPlayer, seed);
+        }
     }
 }
 

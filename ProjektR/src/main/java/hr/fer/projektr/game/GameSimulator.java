@@ -5,6 +5,8 @@ import hr.fer.projektr.game.entities.EntityType;
 import hr.fer.projektr.ui.DinosaurGame;
 import org.ejml.simple.SimpleMatrix;
 
+import java.util.Random;
+
 public class GameSimulator {
 
     private static final long DEFAULT_SEED = 3;
@@ -34,6 +36,10 @@ public class GameSimulator {
             fitness[i] /= NUMBER_OF_GAMES;
         }
         return fitness;
+    }
+
+    public static void play(NeuralNetwork unit) {
+        play(unit, new Random().nextLong());
     }
 
     public static void play(NeuralNetwork unit, long seed) {

@@ -2,15 +2,16 @@ package hr.fer.projektr.ai;
 
 import org.ejml.simple.SimpleMatrix;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
 /**
  * Class representing a neural network
  */
-public class NeuralNetwork {
-    private int inputSize;
-    private Layer[] layers;
+public class NeuralNetwork implements Serializable {
+    private final int inputSize;
+    private final Layer[] layers;
     /**
      * Constructor
      * @param inputSize int Number of inputs to the network

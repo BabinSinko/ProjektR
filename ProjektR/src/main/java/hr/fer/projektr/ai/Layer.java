@@ -2,6 +2,7 @@ package hr.fer.projektr.ai;
 
 import org.ejml.simple.SimpleMatrix;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Random;
 
@@ -9,7 +10,7 @@ import java.util.Random;
  * Class representing a single layer of neural network
  * Each Layer has a matrix of weights and biases and an activation function
  */
-public class Layer {
+public class Layer implements Serializable {
 
     private int layerSize;
     private ActivationFunctionApplier activationFunction;
@@ -110,6 +111,14 @@ public class Layer {
                 matrix.set(i, j, rand.nextDouble(max - min + 1) + min);
             }
         }
+    }
+
+    public void setWeights(SimpleMatrix weights) {
+        this.weights = weights;
+    }
+
+    public void setBiases(SimpleMatrix biases) {
+        this.biases = biases;
     }
 
     @Override
