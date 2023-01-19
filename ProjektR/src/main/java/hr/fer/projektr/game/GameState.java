@@ -52,6 +52,7 @@ public class GameState {
     public static final double MIN_BIRD_Y = 1;
     public static final double MAX_BIRD_Y = 1-0.5*GameState.INITIAL_JUMP_SPEED*GameState.INITIAL_JUMP_SPEED/GameState.GRAVITY;
     public static final double CENTER_BIRD_Y = 1 - PLAYER_DUCKING_HEIGHT - 0.02;
+    public static final double MAX_CENTER_BIRD_Y = (MAX_BIRD_Y+MIN_BIRD_Y)/2;
 
     //Constants relating to the bird enemies
     public static final double COIN_HEIGHT = PLAYER_HEIGHT * 52/86;
