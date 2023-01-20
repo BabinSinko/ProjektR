@@ -10,6 +10,7 @@ import org.ejml.simple.SimpleMatrix;
 import javax.management.OperationsException;
 import javax.swing.*;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.util.Scanner;
 
@@ -38,7 +39,7 @@ public class Main {
             NeuralNetwork unit = null;
             double fitness;
             try {
-                FileInputStream fileInputStream = new FileInputStream("AI.ser");
+                InputStream fileInputStream = Main.class.getClassLoader().getResourceAsStream("AI.ser");
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
                 unit = (NeuralNetwork) objectInputStream.readObject();
                 fitness = (double) objectInputStream.readObject();
