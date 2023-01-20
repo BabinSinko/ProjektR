@@ -4,9 +4,11 @@ import hr.fer.projektr.ai.Layer;
 import hr.fer.projektr.ai.NeuralNetwork;
 import hr.fer.projektr.ai.Training;
 import hr.fer.projektr.game.GameSimulator;
+import hr.fer.projektr.ui.DinosaurGame;
 import org.ejml.simple.SimpleMatrix;
 
 import javax.management.OperationsException;
+import javax.swing.*;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.Scanner;
@@ -17,6 +19,7 @@ public class Main {
 
         System.out.println("AI training (1)");
         System.out.println("Load AI from AI.ser (2)");
+        System.out.println("Play the game (3)");
         System.out.print("Choose activity: ");
         var input = Integer.parseInt(scanner.nextLine());
         System.out.println();
@@ -53,6 +56,11 @@ public class Main {
 
             System.out.print("Starting game with a unit of " + fitness + " fitness.");
             GameSimulator.play(unit);
+        } else if (input == 3) {
+            SwingUtilities.invokeLater(() -> {
+                JFrame frame = new DinosaurGame();
+                frame.setVisible(true);
+            });
         }
     }
 }
