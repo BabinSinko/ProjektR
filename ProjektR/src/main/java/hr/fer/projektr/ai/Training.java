@@ -1,6 +1,7 @@
 package hr.fer.projektr.ai;
 
 
+import hr.fer.projektr.Main;
 import hr.fer.projektr.game.GameSimulator;
 
 import java.io.FileOutputStream;
@@ -74,7 +75,7 @@ public class Training {
             if (currIteration % 100 == 0) {
                 System.out.println("Saving AI backup just in case...");
                 try {
-                    FileOutputStream fos = new FileOutputStream("./src/main/resources/AI.ser");
+                    FileOutputStream fos = new FileOutputStream(Main.getCurrentPath() + "/AI.ser");
                     ObjectOutputStream oos = new ObjectOutputStream(fos);
                     oos.writeObject(population[bestFitnessInd]);
                     oos.writeObject(currBestFitness);
@@ -101,7 +102,7 @@ public class Training {
         if (scanner.nextLine().equals("y")) {
             System.out.println("Saving...");
             try {
-                FileOutputStream fos = new FileOutputStream("./src/main/resources/AI.ser");
+                FileOutputStream fos = new FileOutputStream(Main.getCurrentPath() + "/AI.ser");
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
                 oos.writeObject(bestPlayer);
                 oos.writeObject(fitness[bestPlayerIndex]);

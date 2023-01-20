@@ -9,9 +9,10 @@ import org.ejml.simple.SimpleMatrix;
 
 import javax.management.OperationsException;
 import javax.swing.*;
+import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.net.URISyntaxException;
 import java.util.Scanner;
 
 public class Main {
@@ -39,7 +40,7 @@ public class Main {
             NeuralNetwork unit = null;
             double fitness;
             try {
-                InputStream fileInputStream = Main.class.getClassLoader().getResourceAsStream("AI.ser");
+                FileInputStream fileInputStream = new FileInputStream(getCurrentPath() + "/AI.ser");
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
                 unit = (NeuralNetwork) objectInputStream.readObject();
                 fitness = (double) objectInputStream.readObject();
@@ -63,5 +64,10 @@ public class Main {
                 frame.setVisible(true);
             });
         }
+    }
+
+    public static String getCurrentPath() throws URISyntaxException {
+        var path = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
+        return path.substring(0, path.lastIndexOf("/") + 1);
     }
 }
