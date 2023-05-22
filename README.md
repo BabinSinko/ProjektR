@@ -1,5 +1,3 @@
-Collaborators: Marin Jaić, Matej Ištuk, Samuel Lucić, Mateo Kopačević, Borna Lindić, Filip Pankretić, Franjo Tukara, Sven Leo Kupres
-
 Javan Skokoljub je igra koja svoju insipraciju jako intenzivno vuče iz Google-ovog "Google Dino Run".
 Igra je veoma jednostavna i svodi se na preskakanje kaktusa i saginjanje ispod ptica koje vam se nalaze na putu. 
 Osim toga, u ovoj rendiciji, dinosauru je dana mogućnost skupljanja novčića za dodatne bodove.
